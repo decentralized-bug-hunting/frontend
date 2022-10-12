@@ -1,0 +1,43 @@
+.hero-sec{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 6rem 0;
+}
+
+.hero-sec .left{
+    width: 30vw;
+}
+
+.hero-sec .left h2{
+    font-size: 3rem;
+    color: rgb(20, 19, 19);
+    margin-bottom: 1.8rem;
+}
+
+.hero-sec .left p{
+    font-size: 1.4rem;
+    color: rgb(65, 65, 65);
+    margin-bottom: 2rem;
+}
+
+.hero-sec .left button{
+    padding: 12px 20px;
+    background-color: royalblue;
+    color: #fff;
+    border: none;
+    font-size: 1.1rem;
+    border-radius: 0.8rem
+}
+
+.hero-sec .left button:hover{
+    cursor: pointer;
+}
+
+.hero-sec .right{
+    width: 35rem;
+}
+
+.hero-sec .right img{
+    width: 90%;
+}

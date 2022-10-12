@@ -1,0 +1,36 @@
+.cta-sec{
+    background-color: royalblue;
+    /* border-radius: 1rem; */
+    padding: 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cta-sec h2{
+    color: #fff;
+}
+
+.cta-sec p {
+    font-size: 1.1rem;
+    color: rgba(255,255,255, 0.8);
+    margin-bottom: 2rem;
+}
+/* 
+.cta-sec button{
+    margin-left: 0rem;
+} */
+
+.cta-sec .cta-btn{
+    margin-left: -2rem;
+    padding: 10px 16px;
+    background-color: #fff;
+    color: #000;
+    border: none;
+    font-size: 1.1rem;
+    border-radius: 0.8rem;
+}
+
+.cta-sec .cta-btn:hover{
+    cursor: pointer;
+}

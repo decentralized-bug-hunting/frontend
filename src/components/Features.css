@@ -1,0 +1,50 @@
+.features-sec .features-cards{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 4rem 0;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+
+h2.sub-heading{
+    font-size: 2.4rem;
+    text-align: center;
+    color: rgb(20, 19, 19, 0.8);
+    margin-bottom: 1.6rem;
+}
+
+.features-sec p{
+    font-size: 1.2rem;
+    text-align: center;
+    color: rgb(65, 65, 65);
+    margin-bottom: 2rem;
+}
+
+.feature-card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 20rem;
+}
+
+.feature-card img{
+    margin-bottom: 0.8rem;
+    height: 90px;
+    width: 90px;
+}
+
+.feature-card h3{
+    font-size: 1.7rem;
+    color: rgb(20, 19, 19, 0.8);
+    font-weight: 600;
+    margin-bottom: 1.4rem;
+}
+
+.feature-card p{
+    font-size: 1.1rem;
+    text-align: center;
+    line-height: 1.6rem;
+    letter-spacing: 0.01rem;
+}
