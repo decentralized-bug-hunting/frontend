@@ -1,0 +1,55 @@
+.issue-card{
+    display: flex;
+    justify-content: space-around;
+    margin: 1rem 0;
+    padding: 1rem;
+}
+
+.issue-card h3{
+    color: royalblue;
+    margin-bottom: 1rem;
+    font-size: 1.6rem;
+}
+
+.issue-card p {
+    color: #6b6a6a;
+    font-size: 1.2rem;
+}
+
+.issue-card p.company{
+    margin-top: 1rem;
+    font-size: 1rem;    
+}
+
+.issue-card .reward{
+    color: black;
+}
+
+.issue-card .company-img{
+    display: flex;
+    align-content: center;
+    margin-top: 1.6rem;
+    margin-right: 2.6rem;
+    /* justify-content: center; */
+}
+
+.issue-card .company-img img{
+    width: 50px;
+    height: 50px;
+    margin-right: 1rem;
+}
+
+.issue-card .additional-info{
+    display: flex;
+    
+}
+
+.issue-card .reward{
+    display: flex;
+    align-items: center;
+}
+
+.issue-card .reward-icon{
+    width: 50px;
+    height: 50px;
+}
