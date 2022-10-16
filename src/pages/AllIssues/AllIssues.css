@@ -6,11 +6,8 @@
 }
 
 .issues h2 {
-    /* text-align: center; */
     font-size: 2rem;
-    color: #6b6a6a
-    /* text-decoration: underline; */
-    /* margin-bottom: 3rem; */
+    color: #6b6a6a;
 }
 
 .issues hr{
