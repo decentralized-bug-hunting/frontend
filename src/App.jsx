@@ -5,6 +5,7 @@ import Main from './pages/Landing/Main'
 import ErrorPage from './pages/Error/ErrorPage'
 import Companies from './pages/Companies/Companies'
 import Issue from './pages/Issue/Issue'
+import Getstarted from './pages/login/getstarted'
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
         <Route path="/" element={<Main />} />
         <Route path="/companies" element={<Companies/>}/>
         <Route path="/issue" element={<Issue/>}/>
+        <Route path="/getstarted" element={<Getstarted/>}/>
         <Route path="*" element={<ErrorPage/>}/>
       </Routes>
     </Router>
