@@ -1,3 +1,9 @@
+.form-container{
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
 .issue-form{
    display: flex;
    flex-direction: column;
