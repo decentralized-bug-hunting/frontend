@@ -1,14 +1,12 @@
 import React from 'react';
 import Navbar from '../../components/Navbar'
-import Footer from '../../components/footer'
+import Footer from '../../components/Footer'
 
 import "./getstarted.css";
 import {BsFillBugFill} from 'react-icons/bs';
 import {ImOffice} from 'react-icons/im';
 
 import {RiAdminFill} from 'react-icons/ri';
-
-
 
 
 function Getstarted(){

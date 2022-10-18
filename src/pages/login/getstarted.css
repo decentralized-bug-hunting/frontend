@@ -4,8 +4,8 @@
   margin:0;
 }
 
-
 .getstarted{
+  margin-top: 2rem;
   padding:50px;
   min-height: 80vh;
   display: flex;
@@ -19,14 +19,14 @@
 }
 
 .getstarted .title h1{
-  font-size: 18px;
+  font-size: 2rem;
   color: rgb(128, 120, 120);
   font-weight: 400;
   letter-spacing: 0.01em;
 }
 
 .getstarted .title h2{
-  font-size: 30px;
+  font-size: 2.4rem;
   color: rgb(27, 25, 25);
   letter-spacing: 0.01em;
   font-family: 'DM Sans', sans-serif;
@@ -53,11 +53,12 @@
 }
 
 .getstarted .gcontent .gcard .icon{
-  font-size: 30px;
+  font-size: 3.2rem;
   color:#676869;
 }
 .getstarted .gcontent .gcard h2{
-  font-size: 18px;
+  font-size: 1.6rem;
+  margin-top: 1rem;
   font-weight: bold;
   padding:15px 0px;
 }
@@ -65,13 +66,18 @@
 
 
 .getstarted .gcontent .gcard button{
+  margin-top: 1.1rem;
   background-color: #3c7eff;
   color:white;
   font-weight: bold;
-  padding:5px 10px;
+  padding:0.6rem 1.6rem;
   border: none;
   border-radius: 5px;
   letter-spacing: 0.02em;
+<<<<<<< HEAD
   font-size: 16px;
   cursor: pointer;
+=======
+  font-size: 1.2rem;
+>>>>>>> 5c6e55da8f509678d1b0cb62284a227cf4abfbfc
 }

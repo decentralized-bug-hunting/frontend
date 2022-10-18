@@ -1,0 +1,15 @@
+.issues-container{
+    display: flex;
+    flex-direction: column;
+    margin-top: 4rem;
+    margin-bottom: 6rem;
+}
+
+.issues-container h2 {
+    font-size: 2rem;
+    color: #6b6a6a;
+}
+
+.issues-container hr{
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
