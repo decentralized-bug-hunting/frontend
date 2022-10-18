@@ -18,7 +18,7 @@ function Getstarted(){
         <div className='getstarted'>
             <div className='title'>
                 <h1>Get Started</h1>
-                <h2>Choose Appropriate Service</h2>
+                <h2>Choose Appropriate Services</h2>
             </div>
             <div className='gcontainer'>
                 <div className='gcontent'>

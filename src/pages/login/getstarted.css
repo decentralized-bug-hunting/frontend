@@ -62,10 +62,7 @@
   padding:15px 0px;
 }
 
-.getstarted .gcontent .gcard a{
-  text-decoration: none;
-  cursor: pointer;
-}
+
 
 .getstarted .gcontent .gcard button{
   background-color: #3c7eff;
@@ -76,4 +73,5 @@
   border-radius: 5px;
   letter-spacing: 0.02em;
   font-size: 16px;
+  cursor: pointer;
 }
