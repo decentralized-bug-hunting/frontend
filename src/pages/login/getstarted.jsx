@@ -1,15 +1,41 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Navbar from '../../components/Navbar'
 import Footer from '../../components/Footer'
 
 import "./getstarted.css";
 import {BsFillBugFill} from 'react-icons/bs';
-import {ImOffice} from 'react-icons/im';
+import {ImOffice, ImCross} from 'react-icons/im';
 
 import {RiAdminFill} from 'react-icons/ri';
 
 
 function Getstarted(){
+    const [modal, showmodal] = useState(false)
+    const initialdata = {
+        'name':'',
+        'email':'',
+        'phone':'',
+    }
+    const [formvalue, setFormvalue] = useState(initialdata)
+
+    const handleinputChange = e => {
+        var { name, value } = e.target
+        setFormvalue({
+            ...formvalue,
+            [name]: value
+        })
+        console.log(formvalue)
+
+    } 
+    const handleFormSubmit = () => {
+        console.log("page submitted")
+        console.log(formvalue)
+
+    }
+
+
+
+
     return(
         <>
         <Navbar/>
@@ -25,7 +51,7 @@ function Getstarted(){
                             <BsFillBugFill/>
                         </div>
                         <h2>I am a Bug Hunter</h2>
-                        <a href="#"><button>Signin</button></a>
+                        <a href="#" onClick={()=>showmodal(true)}><button>Signin</button></a>
                     </div>
 
                     <div className='gcard'>
@@ -33,7 +59,7 @@ function Getstarted(){
                             <ImOffice/>
                         </div>
                         <h2>We are a Company</h2>
-                        <a href="#"><button>Signin</button></a>
+                        <a href="#" ><button onClick={()=>showmodal(true)}>Signin</button></a>
                     </div>
 
                     <div className='gcard'>
@@ -41,7 +67,7 @@ function Getstarted(){
                             <RiAdminFill/>
                         </div>
                         <h2>I am a Admin </h2>
-                        <a href="#"><button>Signin</button></a>
+                        <a href="#" onClick={()=>showmodal(true)}><button>Signin</button></a>
                     </div>
                 </div>
             </div>
@@ -49,6 +75,33 @@ function Getstarted(){
             
 
         </div>
+        {modal===true &&
+        <div className='modal'>
+            <div className='mcontainer'>
+                <h2>Register</h2>
+                <form id="myform" onSubmit={handleFormSubmit}>
+                    <div className="input_field">
+                        <h3>Name:</h3>
+                        <input type="text" placeholder="Your Name" value={formvalue.name} name="name" onChange={handleinputChange} id="name" />
+                    </div>
+                    <div className="input_field">
+                        <h3>Email</h3>
+                        <input type="text" placeholder="Your Email Address" value={formvalue.email} name="email" onChange={handleinputChange} id="email" />
+                    </div>
+                    <div className="input_field">
+                        <h3>Phone Number:</h3>
+                        <input type="text" placeholder="Your Phone Number" value={formvalue.phone} name="phone" onChange={handleinputChange} id="phone" />
+                    </div>
+
+                    <div className="mbutton">
+                        <input className='button' type="submit" value="Submit" />
+                    </div>
+                    <div className="cross" onClick={()=>showmodal(false)}><ImCross /></div>
+                </form>
+            </div>
+        </div>
+        }
+        
         <Footer/>
         </>
     )

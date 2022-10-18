@@ -1,4 +1,4 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;600;700;800;1000&display=swap');
 *{
   padding:0;
   margin:0;
@@ -57,7 +57,7 @@
   color:#676869;
 }
 .getstarted .gcontent .gcard h2{
-  font-size: 1.6rem;
+  font-size: 1.2rem;
   margin-top: 1rem;
   font-weight: bold;
   padding:15px 0px;
@@ -74,10 +74,86 @@
   border: none;
   border-radius: 5px;
   letter-spacing: 0.02em;
-<<<<<<< HEAD
-  font-size: 16px;
-  cursor: pointer;
-=======
-  font-size: 1.2rem;
->>>>>>> 5c6e55da8f509678d1b0cb62284a227cf4abfbfc
+  font-size: 1rem;
+}
+
+.modal{
+  position: fixed;
+  top: 0;
+  right:0;
+  height: 100vh;
+  width:100%;
+  background-color: rgb(55, 57, 59, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.modal .mcontainer{
+  height:55vh;
+  width:400px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+  padding:30px;
+
+}
+
+.modal .mcontainer h2{
+  font-family: Mulish;
+  letter-spacing: 0.02em;
+  font-weight: 800;
+  padding-bottom: 10px;
+}
+
+.modal .mcontainer h3{
+  font-size: 1rem;
+  padding: 5px;
+}
+
+
+.modal .mcontainer .cross{
+  width:20px;
+  padding:3px;
+  height:20px;
+  position: absolute;
+  top:0px;
+  right:0;
+  margin:20px;
+  color:rgb(153, 154, 155);
+
+}
+
+.modal .mcontainer .input_field input{
+  border:1px solid rgb(207, 203, 203);
+  border-radius: 5px;
+  padding:10px 8px;
+  width:300px;
+}
+
+.modal .mcontainer .input_field input::placeholder{
+  font-family: Mulish;
+  font-weight: 600;
+  color: rgb(71, 72, 73,0.7);
+  letter-spacing: 0.02em;
+}
+
+.modal .mbutton{
+  padding:10px 0
+
+}
+
+.modal .button{
+  border:none;
+  background-color: #5cb85c;
+  color:white;
+  letter-spacing: 0.02em;
+  padding:10px 20px;
+  border-radius: 5px;
+  font-family: Mulish;
+  font-weight: 700;
+
 }
