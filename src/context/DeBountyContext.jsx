@@ -24,6 +24,7 @@ const createEthereumContract = () => {
 export const DebountyProvider = ({ children }) => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentAccount, setCurrentAccount] = useState("");
+  const [validHunter, setValidHunter] = useState("");
 
   const connectWallet = async () => {
     try {
@@ -92,13 +93,30 @@ export const DebountyProvider = ({ children }) => {
         console.log("Registering..wait", registerTxn.hash);
         await registerTxn.wait();
         console.log("Registration complete", registerTxn.hash);
-        window.location.reload();
+        // window.location.reload();
       } else {
         console.log("Failed to connect to metamask wallet");
       }
     } catch (error) {
       console.log("Reg error", error);
       window.alert("Registration Unsuccessful", error);
+    }
+  };
+
+  const checkValidHunter = async () => {
+    try {
+      if (ethereum) {
+        const deBountyContract = createEthereumContract();
+        const validHunter = await deBountyContract.isHunterValid();
+        const logged = JSON.parse(localStorage.getItem("loggedIn")).entry;
+        //valid user and logged in state
+        logged && setValidHunter(validHunter);
+        console.log("User status:", validHunter);
+      } else {
+        console.log("Ethereum is not present");
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -111,6 +129,8 @@ export const DebountyProvider = ({ children }) => {
       value={{
         connectWallet,
         currentAccount,
+        validHunter,
+        checkValidHunter,
         logout,
         checkWalletConnection,
         registerHunter,

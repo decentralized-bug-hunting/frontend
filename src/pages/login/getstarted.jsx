@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 
@@ -8,11 +8,21 @@ import { ImOffice, ImCross } from "react-icons/im";
 
 import { RiAdminFill } from "react-icons/ri";
 import { DebountyContext } from "../../context/DeBountyContext";
+import { Link } from "react-router-dom";
 
 function Getstarted() {
   const [modal, showmodal] = useState(false);
-  const { connectWallet, currentAccount, registerHunter } =
-    useContext(DebountyContext);
+  const {
+    connectWallet,
+    currentAccount,
+    registerHunter,
+    checkValidHunter,
+    validHunter,
+  } = useContext(DebountyContext);
+
+  useEffect(() => {
+    checkValidHunter();
+  }, []);
 
   const initialdata = {
     name: "",
@@ -42,7 +52,7 @@ function Getstarted() {
     console.log("OKIEE", formData);
     registerHunter(formData);
 
-    // event.currentTarget.reset();
+    event.currentTarget.reset();
   };
 
   return (
@@ -60,9 +70,18 @@ function Getstarted() {
                 <BsFillBugFill />
               </div>
               <h2>I am a Bug Hunter</h2>
-              <a href="#" onClick={() => showmodal(true)}>
-                <button>Signin</button>
-              </a>
+              {validHunter ? (
+                <>
+                  <Link to="/all-issues" className="btn btn-primary">
+                    {" "}
+                    Go to Dashboard
+                  </Link>
+                </>
+              ) : (
+                <a href="#" onClick={() => showmodal(true)}>
+                  <button>Signin</button>
+                </a>
+              )}
             </div>
 
             <div className="gcard">
@@ -87,6 +106,7 @@ function Getstarted() {
           </div>
         </div>
       </div>
+
       {modal === true && (
         <div className="modal">
           <div className="mcontainer">
