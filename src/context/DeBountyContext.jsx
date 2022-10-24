@@ -79,6 +79,29 @@ export const DebountyProvider = ({ children }) => {
     }
   };
 
+  const registerHunter = async (formData) => {
+    try {
+      if (ethereum) {
+        console.log("Form data", formData);
+        const deBountyContract = createEthereumContract();
+        const { name } = formData;
+        const registerTxn = await deBountyContract.registerHunter(name, {
+          gasLimit: 300000,
+        });
+
+        console.log("Registering..wait", registerTxn.hash);
+        await registerTxn.wait();
+        console.log("Registration complete", registerTxn.hash);
+        window.location.reload();
+      } else {
+        console.log("Failed to connect to metamask wallet");
+      }
+    } catch (error) {
+      console.log("Reg error", error);
+      window.alert("Registration Unsuccessful", error);
+    }
+  };
+
   useEffect(() => {
     checkWalletConnection();
   }, []);
@@ -90,6 +113,7 @@ export const DebountyProvider = ({ children }) => {
         currentAccount,
         logout,
         checkWalletConnection,
+        registerHunter,
       }}
     >
       {children}
