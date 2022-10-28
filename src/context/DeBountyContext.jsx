@@ -26,6 +26,10 @@ export const DebountyProvider = ({ children }) => {
   const [currentAccount, setCurrentAccount] = useState("");
   const [validHunter, setValidHunter] = useState("");
 
+  // if(localStorage.getItem('loggedIn')){
+  //   setLoggedIn(true)
+  // }
+
   const connectWallet = async () => {
     try {
       const { ethereum } = window;
@@ -39,6 +43,7 @@ export const DebountyProvider = ({ children }) => {
       });
       setLoggedIn(true);
       localStorage.setItem("loggedIn", JSON.stringify({ entry: true }));
+      localStorage.setItem("currentAccount", JSON.stringify(accounts[0]));
 
       console.log("Wallet connectes", accounts[0]);
       setCurrentAccount(accounts[0]);
@@ -49,6 +54,7 @@ export const DebountyProvider = ({ children }) => {
 
   const logout = () => {
     localStorage.removeItem("loggedIn");
+    localStorage.removeItem('currentAccount')
     document.location.href = "/";
     setLoggedIn(false);
   };
@@ -92,7 +98,11 @@ export const DebountyProvider = ({ children }) => {
 
         console.log("Registering..wait", registerTxn.hash);
         await registerTxn.wait();
-        console.log("Registration complete", registerTxn.hash);
+        console.log("Registration complete", registerTxn.hash);  
+        if(registerTxn.hash){
+          localStorage.setItem('user', JSON.stringify(formData))
+          window.location.href = "/all-issues"
+        }     
         // window.location.reload();
       } else {
         console.log("Failed to connect to metamask wallet");
@@ -122,11 +132,17 @@ export const DebountyProvider = ({ children }) => {
 
   useEffect(() => {
     checkWalletConnection();
+    if((JSON.parse(localStorage.getItem('loggedIn'))) && localStorage.getItem('currentAccount')){
+      setLoggedIn(JSON.parse(localStorage.getItem('loggedIn')).entry)
+      setCurrentAccount(localStorage.getItem('currentAccount'))
+    }
+
   }, []);
 
   return (
     <DebountyContext.Provider
       value={{
+        loggedIn,
         connectWallet,
         currentAccount,
         validHunter,

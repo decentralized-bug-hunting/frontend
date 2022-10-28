@@ -13,7 +13,7 @@ function Hero() {
         <p>A decentralized solution to bug bounty</p>
 
         {currentAccount ? (
-          "Get Started"
+          <p style={{fontSize: '1rem'}}><strong>Connected Account: </strong>{currentAccount}</p>
         ) : (
           <button onClick={connectWallet} className="btn btn-wallet-connect">
             Connect Wallet

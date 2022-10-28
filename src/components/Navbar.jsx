@@ -4,7 +4,7 @@ import { DebountyContext } from "../context/DeBountyContext";
 import "./Navbar.css";
 function Navbar() {
   const [stickyClass, setStickyClass] = useState("");
-  const { connectWallet, currentAccount } = useContext(DebountyContext);
+  const { connectWallet, currentAccount, logout } = useContext(DebountyContext);
 
   useEffect(() => {
     window.addEventListener("scroll", stickNavbar);
@@ -28,11 +28,12 @@ function Navbar() {
           <li>Home</li>
           <li>About</li>
           <li>Company</li>
-          <li>Login</li>
         </ul>
         
         {currentAccount ? (
-          "Get Started"
+          <button onClick={logout} className="btn btn-wallet-logout">
+          Logout
+        </button>
         ) : (
           <button onClick={connectWallet} className="btn btn-wallet-connect">
             Connect Wallet
