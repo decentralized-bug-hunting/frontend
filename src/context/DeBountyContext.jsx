@@ -47,6 +47,7 @@ export const DebountyProvider = ({ children }) => {
 
       console.log("Wallet connectes", accounts[0]);
       setCurrentAccount(accounts[0]);
+      window.location.href = "/getstarted"
     } catch (error) {
       console.log("Error on wallet connection", error);
     }
@@ -136,7 +137,6 @@ export const DebountyProvider = ({ children }) => {
       setLoggedIn(JSON.parse(localStorage.getItem('loggedIn')).entry)
       setCurrentAccount(localStorage.getItem('currentAccount'))
     }
-
   }, []);
 
   return (
