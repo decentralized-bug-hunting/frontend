@@ -18,9 +18,11 @@ function Getstarted() {
     registerHunter,
     checkValidHunter,
     validHunter,
+    getHunter
   } = useContext(DebountyContext);
 
   useEffect(() => {
+    getHunter()
     checkValidHunter();
   }, []);
 

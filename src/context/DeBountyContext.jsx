@@ -26,10 +26,6 @@ export const DebountyProvider = ({ children }) => {
   const [currentAccount, setCurrentAccount] = useState("");
   const [validHunter, setValidHunter] = useState("");
 
-  // if(localStorage.getItem('loggedIn')){
-  //   setLoggedIn(true)
-  // }
-
   const connectWallet = async () => {
     try {
       const { ethereum } = window;
@@ -87,6 +83,23 @@ export const DebountyProvider = ({ children }) => {
     }
   };
 
+  //To get logged in hunter details
+  const getHunter = async () => {
+    try {
+      if (ethereum) {
+        const debountyContract = createEthereumContract();
+        console.log(debountyContract)
+        const hunter = await debountyContract.getHunter();
+        console.log(hunter);
+        // setKycRequestedClients(clients);
+      } else {
+        console.log("Ethereum is not present");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const registerHunter = async (formData) => {
     try {
       if (ethereum) {
@@ -96,15 +109,14 @@ export const DebountyProvider = ({ children }) => {
         const registerTxn = await deBountyContract.registerHunter(name, {
           gasLimit: 300000,
         });
-
         console.log("Registering..wait", registerTxn.hash);
         await registerTxn.wait();
         console.log("Registration complete", registerTxn.hash);  
         if(registerTxn.hash){
           localStorage.setItem('user', JSON.stringify(formData))
-          window.location.href = "/all-issues"
+          // window.location.href = "/all-issues"
         }     
-        // window.location.reload();
+        window.location.reload();
       } else {
         console.log("Failed to connect to metamask wallet");
       }
@@ -150,6 +162,7 @@ export const DebountyProvider = ({ children }) => {
         logout,
         checkWalletConnection,
         registerHunter,
+        getHunter
       }}
     >
       {children}

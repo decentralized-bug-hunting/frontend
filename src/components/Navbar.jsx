@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import logo from "../assets/logo-new.png";
 import { DebountyContext } from "../context/DeBountyContext";
+import {Link} from 'react-router-dom'
 import "./Navbar.css";
 function Navbar() {
   const [stickyClass, setStickyClass] = useState("");
@@ -21,7 +22,7 @@ function Navbar() {
   return (
     <nav className={`${stickyClass}`}>
       <div className="left_logo">
-        <img src={logo} alt="" />
+        <Link to="/"><img src={logo} alt="" /></Link>
       </div>
       <div className="menu">
         <ul className="menuItems">
