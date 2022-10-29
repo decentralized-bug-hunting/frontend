@@ -25,6 +25,7 @@ export const DebountyProvider = ({ children }) => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentAccount, setCurrentAccount] = useState("");
   const [validHunter, setValidHunter] = useState("");
+  const [validCompany, setValidCompany] = useState("");
 
   // if(localStorage.getItem('loggedIn')){
   //   setLoggedIn(true)
@@ -47,7 +48,7 @@ export const DebountyProvider = ({ children }) => {
 
       console.log("Wallet connectes", accounts[0]);
       setCurrentAccount(accounts[0]);
-      window.location.href = "/getstarted"
+      window.location.href = "/getstarted";
     } catch (error) {
       console.log("Error on wallet connection", error);
     }
@@ -55,7 +56,7 @@ export const DebountyProvider = ({ children }) => {
 
   const logout = () => {
     localStorage.removeItem("loggedIn");
-    localStorage.removeItem('currentAccount')
+    localStorage.removeItem("currentAccount");
     document.location.href = "/";
     setLoggedIn(false);
   };
@@ -99,11 +100,11 @@ export const DebountyProvider = ({ children }) => {
 
         console.log("Registering..wait", registerTxn.hash);
         await registerTxn.wait();
-        console.log("Registration complete", registerTxn.hash);  
-        if(registerTxn.hash){
-          localStorage.setItem('user', JSON.stringify(formData))
-          window.location.href = "/all-issues"
-        }     
+        console.log("Registration complete", registerTxn.hash);
+        if (registerTxn.hash) {
+          localStorage.setItem("user", JSON.stringify(formData));
+          window.location.href = "/all-issues";
+        }
         // window.location.reload();
       } else {
         console.log("Failed to connect to metamask wallet");
@@ -114,15 +115,54 @@ export const DebountyProvider = ({ children }) => {
     }
   };
 
+  const registerCompany = async (formData) => {
+    try {
+      if (ethereum) {
+        console.log("Company reg form data", formData);
+        const deBountyContract = createEthereumContract();
+        const { name, phone } = formData;
+        const registerTxn = await deBountyContract.registerCompany(
+          name,
+          phone,
+          {
+            gasLimit: 300000,
+          }
+        );
+        console.log("Registering..wait", registerTxn.hash);
+        await registerTxn.wait();
+        console.log("Registration complete", registerTxn.hash);
+      } else {
+        console.log("Failed to connect to metamask wallet");
+      }
+    } catch (error) {
+      console.log("Company Reg error", error);
+
+      window.alert("Registration Unsuccessful", error);
+    }
+  };
+
   const checkValidHunter = async () => {
     try {
       if (ethereum) {
         const deBountyContract = createEthereumContract();
-        const validHunter = await deBountyContract.isHunterValid();
-        const logged = JSON.parse(localStorage.getItem("loggedIn")).entry;
-        //valid user and logged in state
-        logged && setValidHunter(validHunter);
-        console.log("User status:", validHunter);
+        const validHunte = await deBountyContract.isHunterValid();
+        setValidHunter(validHunte);
+        console.log("User status:", validHunte);
+      } else {
+        console.log("Ethereum is not present");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const checkValidCompany = async () => {
+    try {
+      if (ethereum) {
+        const deBountyContract = createEthereumContract();
+        const validComp = await deBountyContract.isCompanyValid();
+        setValidCompany(validComp);
+        console.log("Company status:", validComp);
       } else {
         console.log("Ethereum is not present");
       }
@@ -133,9 +173,12 @@ export const DebountyProvider = ({ children }) => {
 
   useEffect(() => {
     checkWalletConnection();
-    if((JSON.parse(localStorage.getItem('loggedIn'))) && localStorage.getItem('currentAccount')){
-      setLoggedIn(JSON.parse(localStorage.getItem('loggedIn')).entry)
-      setCurrentAccount(localStorage.getItem('currentAccount'))
+    if (
+      JSON.parse(localStorage.getItem("loggedIn")) &&
+      localStorage.getItem("currentAccount")
+    ) {
+      setLoggedIn(JSON.parse(localStorage.getItem("loggedIn")).entry);
+      setCurrentAccount(localStorage.getItem("currentAccount"));
     }
   }, []);
 
@@ -147,9 +190,12 @@ export const DebountyProvider = ({ children }) => {
         currentAccount,
         validHunter,
         checkValidHunter,
+        checkValidCompany,
+        validCompany,
         logout,
         checkWalletConnection,
         registerHunter,
+        registerCompany,
       }}
     >
       {children}

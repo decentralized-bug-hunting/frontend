@@ -11,17 +11,24 @@ import { DebountyContext } from "../../context/DeBountyContext";
 import { Link } from "react-router-dom";
 
 function Getstarted() {
-  const [modal, showmodal] = useState(false);
+  const [modal, showmodal] = useState(false); //for hunter
+
+  const [companyModal, showCompanyModal] = useState(false); //for company
+
   const {
     connectWallet,
     currentAccount,
     registerHunter,
+    registerCompany,
     checkValidHunter,
     validHunter,
+    checkValidCompany,
+    validCompany,
   } = useContext(DebountyContext);
 
   useEffect(() => {
     checkValidHunter();
+    checkValidCompany();
   }, []);
 
   const initialdata = {
@@ -39,11 +46,10 @@ function Getstarted() {
     });
     console.log(formvalue);
   };
-  const handleFormSubmit = (event) => {
+
+  const handleHunterFormSubmit = (event) => {
     event.preventDefault();
-
     const data = new FormData(event.currentTarget);
-
     const formData = {
       name: data.get("name"),
       email: data.get("email"),
@@ -51,7 +57,19 @@ function Getstarted() {
     };
     console.log("OKIEE", formData);
     registerHunter(formData);
+    event.currentTarget.reset();
+  };
 
+  const handleCompanyFormSubmit = (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    const formData = {
+      name: data.get("name"),
+      email: data.get("email"),
+      phone: data.get("phone"),
+    };
+    console.log("OKIEE--", formData);
+    registerCompany(formData);
     event.currentTarget.reset();
   };
 
@@ -70,6 +88,7 @@ function Getstarted() {
                 <BsFillBugFill />
               </div>
               <h2>I am a Bug Hunter</h2>
+
               {validHunter ? (
                 <>
                   <Link to="/all-issues" className="btn btn-primary">
@@ -89,9 +108,18 @@ function Getstarted() {
                 <ImOffice />
               </div>
               <h2>We are a Company</h2>
-              <a href="#">
-                <button onClick={() => showmodal(true)}>Signin</button>
-              </a>
+              {validCompany ? (
+                <>
+                  <Link to="/companies" className="btn btn-primary">
+                    {" "}
+                    Go to Dashboard
+                  </Link>
+                </>
+              ) : (
+                <a href="#" onClick={() => showCompanyModal(true)}>
+                  <button>Signin</button>
+                </a>
+              )}
             </div>
 
             <div className="gcard">
@@ -111,7 +139,7 @@ function Getstarted() {
         <div className="modal">
           <div className="mcontainer">
             <h2>Register</h2>
-            <form id="myform" onSubmit={handleFormSubmit}>
+            <form id="myform" onSubmit={handleHunterFormSubmit}>
               <div className="input_field">
                 <h3>Name:</h3>
                 <input
@@ -150,6 +178,56 @@ function Getstarted() {
                 <input className="button" type="submit" value="Submit" />
               </div>
               <div className="cross" onClick={() => showmodal(false)}>
+                <ImCross />
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {companyModal === true && (
+        <div className="modal">
+          <div className="mcontainer">
+            <h2>Company Register</h2>
+            <form id="myform" onSubmit={handleCompanyFormSubmit}>
+              <div className="input_field">
+                <h3>Company Name:</h3>
+                <input
+                  type="text"
+                  placeholder="Your Name"
+                  value={formvalue.name}
+                  name="name"
+                  onChange={handleinputChange}
+                  id="name"
+                />
+              </div>
+              <div className="input_field">
+                <h3>Company Email</h3>
+                <input
+                  type="text"
+                  placeholder="Your Email Address"
+                  value={formvalue.email}
+                  name="email"
+                  onChange={handleinputChange}
+                  id="email"
+                />
+              </div>
+              <div className="input_field">
+                <h3>Company Contact Number:</h3>
+                <input
+                  type="text"
+                  placeholder="Your Phone Number"
+                  value={formvalue.phone}
+                  name="phone"
+                  onChange={handleinputChange}
+                  id="phone"
+                />
+              </div>
+
+              <div className="mbutton">
+                <input className="button" type="submit" value="Submit" />
+              </div>
+              <div className="cross" onClick={() => showCompanyModal(false)}>
                 <ImCross />
               </div>
             </form>
