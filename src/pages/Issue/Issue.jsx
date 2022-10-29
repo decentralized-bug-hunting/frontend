@@ -1,27 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import "./Issue.css";
+import {DebountyContext} from '../../context/DeBountyContext'
 
 function Issue() {
   const [issues, setIssues] = useState({
     title: "",
     description: "",
-    expectedResult: "",
-    actualResult: "",
-    additionalInfo: "",
+    hash: "",
+    reward: 0
   });
+
+  const {postIssue} = useContext(DebountyContext)
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(issues);
+    postIssue(issues)
     console.log("Submitted");
     setIssues({
       title: "",
       description: "",
-      expectedResult: "",
-      actualResult: "",
-      additionalInfo: "",
+      hash: "",
+      reward: 0
     });
   };
 
@@ -39,7 +41,7 @@ function Issue() {
           <form className="issue-form" onSubmit={handleSubmit}>
             <h2>Bug Submit Form</h2>
             <div>
-              <p>Give a proper title to your Bug</p>
+              <p>Give a proper title to the issue</p>
               <input
                 name="title"
                 type="text"
@@ -49,7 +51,7 @@ function Issue() {
               />
             </div>
             <div>
-              <p>Step by step process to reproduce the bug</p>
+              <p>A brief description to describe an issue to qualify as a bug</p>
               <textarea
                 name="description"
                 id=""
@@ -61,34 +63,23 @@ function Issue() {
               />
             </div>
             <div>
-              <p>What is the expected result?</p>
+              <p>Hash of nft</p>
               <input
-                name="expectedResult"
+                name="hash"
                 type="text"
-                placeholder="Expected Result"
+                placeholder="Hash of nft"
                 onChange={handleChange}
-                value={issues.expectedResult}
+                value={issues.hash}
               />
             </div>
             <div>
-              <p>What is the actual behaviour?</p>
+              <p>Reward amount in wei</p>
               <input
-                name="actualResult"
-                type="text"
-                placeholder="Actual Result"
+                name="reward"
+                type="number"
+                placeholder="Reward ether"
                 onChange={handleChange}
-                value={issues.actualResult}
-              />
-            </div>
-
-            <div>
-              <p>Submit images or screenshot links separated by comma</p>
-              <input
-                name="additionalInfo"
-                type="text"
-                placeholder="Additional Results"
-                onChange={handleChange}
-                value={issues.additionalInfo}
+                value={issues.reward}
               />
             </div>
             <button className="btn">Submit</button>

@@ -5,6 +5,7 @@ import IssueCard from "./IssueCard";
 import "./AllIssues.css";
 
 function AllIssues() {
+  
   return (
     <>
       <Navbar />

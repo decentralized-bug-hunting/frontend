@@ -24,8 +24,9 @@ const createEthereumContract = () => {
 export const DebountyProvider = ({ children }) => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentAccount, setCurrentAccount] = useState("");
-  const [validHunter, setValidHunter] = useState("");
-  const [validCompany, setValidCompany] = useState("");
+  const [validHunter, setValidHunter] = useState(false);
+  const [validCompany, setValidCompany] = useState(false);
+  const [allUnsolvedIssues, setAllUnsolvedIssues] = useState([]);
 
   const connectWallet = async () => {
     try {
@@ -50,6 +51,36 @@ export const DebountyProvider = ({ children }) => {
     }
   };
 
+  //get logged in hunter details
+  const getHunter = async () => {
+    try {
+      if (ethereum) {
+        const deBountyContract = createEthereumContract();
+        const hunter = await deBountyContract.getHunter();
+        console.log("Hunter : ", hunter);
+      } else {
+        console.log("Ethereum is not present");
+      }
+    } catch (error) {
+      console.log(error);
+    }    
+  }
+
+  //get logged in company details
+  const getCompany = async () => {
+    try {
+      if (ethereum) {
+        const deBountyContract = createEthereumContract();
+        const company = await deBountyContract.getCompany();
+        console.log("Company : ", company);
+      } else {
+        console.log("Ethereum is not present");
+      }
+    } catch (error) {
+      console.log(error);
+    }    
+  }
+
   const logout = () => {
     localStorage.removeItem("loggedIn");
     localStorage.removeItem("currentAccount");
@@ -68,7 +99,7 @@ export const DebountyProvider = ({ children }) => {
         console.log("Wallet detected", ethereum);
       }
 
-      const accounts = await ethereum.request({ methods: "eth_accounts" });
+      const accounts = await ethereum.request({ method: 'eth_accounts' })
 
       if (accounts.length !== 0) {
         const account = accounts[0];
@@ -78,23 +109,6 @@ export const DebountyProvider = ({ children }) => {
         logged && setCurrentAccount(account);
       } else {
         console.log("No authorized account found");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  //To get logged in hunter details
-  const getHunter = async () => {
-    try {
-      if (ethereum) {
-        const debountyContract = createEthereumContract();
-        console.log(debountyContract)
-        const hunter = await debountyContract.getHunter();
-        console.log(hunter);
-        // setKycRequestedClients(clients);
-      } else {
-        console.log("Ethereum is not present");
       }
     } catch (error) {
       console.log(error);
@@ -112,11 +126,11 @@ export const DebountyProvider = ({ children }) => {
         });
         console.log("Registering..wait", registerTxn.hash);
         await registerTxn.wait();
-        console.log("Registration complete", registerTxn.hash);  
-        if(registerTxn.hash){
-          localStorage.setItem('user', JSON.stringify(formData))
-          window.location.href = "/all-issues"
-        }     
+        console.log("Registration complete", registerTxn.hash);
+        if (registerTxn.hash) {
+          localStorage.setItem("user", JSON.stringify(formData));
+          window.location.href = "/all-issues";
+        }
         // window.location.reload();
       } else {
         console.log("Failed to connect to metamask wallet");
@@ -183,6 +197,51 @@ export const DebountyProvider = ({ children }) => {
     }
   };
 
+  //get all unsolved issues and store them in allUnsolvedIssues Array
+  const getAllUnsolvedIssues = async () => {
+    try {
+      if (ethereum) {
+        const deBountyContract = createEthereumContract();
+        const issues = await deBountyContract.getAllUnsolvedIssues();
+        setAllUnsolvedIssues(issues);
+        console.log("All unsolved issues", allUnsolvedIssues);
+      } else {
+        console.log("Ethereum is not present");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  //Posting a new issue by company
+  const postIssue = async (formData) => {
+    try {
+      if (ethereum) {
+        console.log("Company reg form data", formData);
+        const { title, description, hash, reward } = formData;
+        const deBountyContract = createEthereumContract();
+        const postTxn = await deBountyContract.postIssue(
+          title,
+          description,
+          hash,
+          reward,
+          {
+            value: reward
+          }
+        );
+        console.log("Posting issue", postTxn.hash);
+        await postTxn.wait();
+        console.log("Posting complete", postTxn.hash);
+      } else {
+        console.log("Failed to connect to metamask wallet");
+      }
+    } catch (error) {
+      console.log("Posting issue error", error);
+
+      window.alert("Issue Posting Unsuccessful", error);
+    }
+  };
+
   useEffect(() => {
     checkWalletConnection();
     if (
@@ -192,6 +251,7 @@ export const DebountyProvider = ({ children }) => {
       setLoggedIn(JSON.parse(localStorage.getItem("loggedIn")).entry);
       setCurrentAccount(localStorage.getItem("currentAccount"));
     }
+    getCompany()
   }, []);
 
   return (
@@ -207,6 +267,8 @@ export const DebountyProvider = ({ children }) => {
         logout,
         checkWalletConnection,
         registerHunter,
+        registerCompany,
+        postIssue
       }}
     >
       {children}
