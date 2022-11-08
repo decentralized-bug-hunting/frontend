@@ -26,8 +26,6 @@ export const DebountyProvider = ({ children }) => {
   const [currentAccount, setCurrentAccount] = useState("");
   const [validHunter, setValidHunter] = useState(false);
   const [validCompany, setValidCompany] = useState(false);
-  const [allUnsolvedIssues, setAllUnsolvedIssues] = useState([]);
-  const [numOfIssues, setNumOfIssues] = useState(0)
   const [allIssues, setAllIssues] = useState([])
 
   const connectWallet = async () => {
@@ -234,7 +232,6 @@ export const DebountyProvider = ({ children }) => {
       if (ethereum) {
         const deBountyContract = createEthereumContract();
         const count = await deBountyContract.issueCount();
-        // setNumOfIssues(count.toString());
         console.log("Total num of Issues:", count.toString());
         let number = Number(count.toString()) 
         return number
