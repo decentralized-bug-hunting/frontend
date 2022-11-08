@@ -289,6 +289,35 @@ export const DebountyProvider = ({ children }) => {
     }
   };
 
+  //get all proposed solution by a company by issueId
+  const getAllProposedSolution = async (issueId) => {
+    try {
+      if (ethereum) {
+        const deBountyContract = createEthereumContract();
+        const allProposedSolutions = await deBountyContract.getAllProposedSolution(issueId);
+        console.log(allProposedSolutions);
+      } else {
+        console.log("Ethereum is not present");
+      }
+    } catch (error) {
+      console.log(error);
+    }     
+  }
+
+  //Accept the proposed solution to an issue by the company
+  const acceptProposedSolution = async (proposedSolnID, issueId) => {
+    try {
+      if (ethereum) {
+        const deBountyContract = createEthereumContract();
+        await deBountyContract.acceptProposedSolution(proposedSolnID, issueId);
+      } else {
+        console.log("Ethereum is not present");
+      }
+    } catch (error) {
+      console.log(error);
+    }         
+  }
+
   useEffect(() => {
     checkWalletConnection();
     if (
@@ -301,6 +330,7 @@ export const DebountyProvider = ({ children }) => {
     getCompany()
     issueCount()
     fetchAllIssues()
+    getAllProposedSolution(0)
   }, []);
 
   return (
@@ -319,7 +349,8 @@ export const DebountyProvider = ({ children }) => {
         registerCompany,
         postIssue,
         postSolution,
-        allIssues
+        allIssues,
+        getAllProposedSolution
       }}
     >
       {children}
