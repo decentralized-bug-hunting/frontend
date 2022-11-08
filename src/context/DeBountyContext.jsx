@@ -304,7 +304,7 @@ export const DebountyProvider = ({ children }) => {
     }     
   }
 
-  //Accept the proposed solution to an issue by the company
+  //Accept the proposed solution to an issue by the company with solution id and issueId
   const acceptProposedSolution = async (proposedSolnID, issueId) => {
     try {
       if (ethereum) {
