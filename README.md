@@ -10,6 +10,7 @@ This project is created with React JS and bootstrapped with Vite. To run this pr
 - [ ] Add protected routes for hunter, company and admin
 - [ ] Create a page for company to view all the Proposed solutions to an issue 
 - [ ] Add the contexts for :
+
 	- [ ] pay hunter
 	- [ ] safeTransferFrom
 	- [ ] transferFrom
