@@ -28,6 +28,7 @@ export const DebountyProvider = ({ children }) => {
   const [validCompany, setValidCompany] = useState(false);
   const [allUnsolvedIssues, setAllUnsolvedIssues] = useState([]);
   const [numOfIssues, setNumOfIssues] = useState(0)
+  const [allIssues, setAllIssues] = useState([])
 
   const connectWallet = async () => {
     try {
@@ -198,22 +199,6 @@ export const DebountyProvider = ({ children }) => {
     }
   };
 
-  //get all unsolved issues and store them in allUnsolvedIssues Array
-  const getAllUnsolvedIssues = async () => {
-    try {
-      if (ethereum) {
-        const deBountyContract = createEthereumContract();
-        const issues = await deBountyContract.getAllUnsolvedIssues();
-        setAllUnsolvedIssues(issues);
-        console.log("All unsolved issues", allUnsolvedIssues);
-      } else {
-        console.log("Ethereum is not present");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   //Posting a new issue by company
   const postIssue = async (formData) => {
     try {
@@ -249,14 +234,35 @@ export const DebountyProvider = ({ children }) => {
       if (ethereum) {
         const deBountyContract = createEthereumContract();
         const count = await deBountyContract.issueCount();
-        setNumOfIssues(count.toString());
+        // setNumOfIssues(count.toString());
         console.log("Total num of Issues:", count.toString());
+        let number = Number(count.toString()) 
+        return number
       } else {
         console.log("Ethereum is not present");
       }
     } catch (error) {
       console.log(error);
     }    
+  }
+
+  //Fetches all the issues on the contract
+  const fetchAllIssues = async () => {
+    try {
+      if (ethereum) {
+        const deBountyContract = createEthereumContract();
+        let count = await issueCount()
+        for (let i = 0; i<count; i++){
+          const issue = await deBountyContract.issues(i);
+          setAllIssues([...allIssues, issue])
+          console.log("All Issues", issue);
+        }
+      } else {
+        console.log("Ethereum is not present");
+      }
+    } catch (error) {
+      console.log(error);
+    } 
   }
 
   //post solution
@@ -297,6 +303,7 @@ export const DebountyProvider = ({ children }) => {
     }
     getCompany()
     issueCount()
+    fetchAllIssues()
   }, []);
 
   return (
@@ -314,7 +321,8 @@ export const DebountyProvider = ({ children }) => {
         registerHunter,
         registerCompany,
         postIssue,
-        postSolution
+        postSolution,
+        allIssues
       }}
     >
       {children}
