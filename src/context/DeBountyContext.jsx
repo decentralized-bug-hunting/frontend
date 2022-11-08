@@ -249,11 +249,13 @@ export const DebountyProvider = ({ children }) => {
       if (ethereum) {
         const deBountyContract = createEthereumContract();
         let count = await issueCount()
+        let issues = []
         for (let i = 0; i<count; i++){
           const issue = await deBountyContract.issues(i);
-          setAllIssues([...allIssues, issue])
+          issues.push(issue)
           console.log("All Issues", issue);
         }
+        setAllIssues(issues)
       } else {
         console.log("Ethereum is not present");
       }
@@ -295,7 +297,8 @@ export const DebountyProvider = ({ children }) => {
       if (ethereum) {
         const deBountyContract = createEthereumContract();
         const allProposedSolutions = await deBountyContract.getAllProposedSolution(issueId);
-        console.log(allProposedSolutions);
+        console.log("All Proposed Solutions", allProposedSolutions);
+        return allProposedSolutions
       } else {
         console.log("Ethereum is not present");
       }
@@ -330,7 +333,7 @@ export const DebountyProvider = ({ children }) => {
     getCompany()
     issueCount()
     fetchAllIssues()
-    getAllProposedSolution(0)
+    // getAllProposedSolution(0)
   }, []);
 
   return (

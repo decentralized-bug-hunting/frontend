@@ -8,6 +8,7 @@ import Issue from './pages/Issue/Issue'
 import AllIssues from './pages/AllIssues/AllIssues'
 import Getstarted from './pages/login/getstarted'
 import PostSolution from './pages/PostSolution/Index'
+import Solution from './pages/Solutions/Solutions'
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
         <Route path="/getstarted" element={<Getstarted/>}/>
         <Route path="/all-issues" element={<AllIssues/>}/>
         <Route path="/post-solution" element={<PostSolution/>}/>        
+        <Route path="/solutions" element={<Solution/>}/>        
         <Route path="*" element={<ErrorPage/>}/>
       </Routes>
     </Router>
