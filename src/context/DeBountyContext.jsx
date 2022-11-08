@@ -27,6 +27,7 @@ export const DebountyProvider = ({ children }) => {
   const [validHunter, setValidHunter] = useState(false);
   const [validCompany, setValidCompany] = useState(false);
   const [allUnsolvedIssues, setAllUnsolvedIssues] = useState([]);
+  const [numOfIssues, setNumOfIssues] = useState(0)
 
   const connectWallet = async () => {
     try {
@@ -242,6 +243,49 @@ export const DebountyProvider = ({ children }) => {
     }
   };
 
+  //get total number of issues on contract 
+  const issueCount = async () => {
+    try {
+      if (ethereum) {
+        const deBountyContract = createEthereumContract();
+        const count = await deBountyContract.issueCount();
+        setNumOfIssues(count.toString());
+        console.log("Total num of Issues:", count.toString());
+      } else {
+        console.log("Ethereum is not present");
+      }
+    } catch (error) {
+      console.log(error);
+    }    
+  }
+
+  //post solution
+  const postSolution = async (formData) => {
+    try {
+      if (ethereum) {
+        console.log("Solution details", formData);
+        const { issueId, description } = formData;
+        const deBountyContract = createEthereumContract();
+        const postTxn = await deBountyContract.postSolutionProposal(
+          issueId,
+          description,
+          {
+            gasLimit: 300000,
+          }
+        );
+        console.log("Posting Solution", postTxn.hash);
+        await postTxn.wait();
+        console.log("Posting solution", postTxn.hash);
+      } else {
+        console.log("Failed to connect to metamask wallet");
+      }
+    } catch (error) {
+      console.log("Posting solution error", error);
+
+      window.alert("solution Posting Unsuccessful", error);
+    }
+  };
+
   useEffect(() => {
     checkWalletConnection();
     if (
@@ -252,6 +296,7 @@ export const DebountyProvider = ({ children }) => {
       setCurrentAccount(localStorage.getItem("currentAccount"));
     }
     getCompany()
+    issueCount()
   }, []);
 
   return (
@@ -268,7 +313,8 @@ export const DebountyProvider = ({ children }) => {
         checkWalletConnection,
         registerHunter,
         registerCompany,
-        postIssue
+        postIssue,
+        postSolution
       }}
     >
       {children}
