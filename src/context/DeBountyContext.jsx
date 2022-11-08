@@ -264,6 +264,21 @@ export const DebountyProvider = ({ children }) => {
     } 
   }
 
+  //fetch a single Issue
+  const fetchIssue = async (id) => {
+    try {
+      if (ethereum) {
+        const deBountyContract = createEthereumContract();
+        const issue = await deBountyContract.issues(id);
+        return issue
+      } else {
+        console.log("Ethereum is not present");
+      }
+    } catch (error) {
+      console.log(error);
+    } 
+  }  
+
   //post solution
   const postSolution = async (formData) => {
     try {
@@ -353,7 +368,9 @@ export const DebountyProvider = ({ children }) => {
         postIssue,
         postSolution,
         allIssues,
-        getAllProposedSolution
+        getAllProposedSolution,
+        fetchIssue,
+        acceptProposedSolution
       }}
     >
       {children}
