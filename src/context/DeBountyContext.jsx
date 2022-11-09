@@ -27,6 +27,7 @@ export const DebountyProvider = ({ children }) => {
   const [validHunter, setValidHunter] = useState(false);
   const [validCompany, setValidCompany] = useState(false);
   const [allIssues, setAllIssues] = useState([])
+  const [company, setCompany] = useState([])
 
   const connectWallet = async () => {
     try {
@@ -63,7 +64,7 @@ export const DebountyProvider = ({ children }) => {
       }
     } catch (error) {
       console.log(error);
-    }    
+    }
   }
 
   //get logged in company details
@@ -73,12 +74,13 @@ export const DebountyProvider = ({ children }) => {
         const deBountyContract = createEthereumContract();
         const company = await deBountyContract.getCompany();
         console.log("Company : ", company);
+        setCompany(company)
       } else {
         console.log("Ethereum is not present");
       }
     } catch (error) {
       console.log(error);
-    }    
+    }
   }
 
   const logout = () => {
@@ -233,14 +235,14 @@ export const DebountyProvider = ({ children }) => {
         const deBountyContract = createEthereumContract();
         const count = await deBountyContract.issueCount();
         console.log("Total num of Issues:", count.toString());
-        let number = Number(count.toString()) 
+        let number = Number(count.toString())
         return number
       } else {
         console.log("Ethereum is not present");
       }
     } catch (error) {
       console.log(error);
-    }    
+    }
   }
 
   //Fetches all the issues on the contract
@@ -250,10 +252,10 @@ export const DebountyProvider = ({ children }) => {
         const deBountyContract = createEthereumContract();
         let count = await issueCount()
         let issues = []
-        for (let i = 0; i<count; i++){
+        for (let i = 0; i < count; i++) {
           const issue = await deBountyContract.issues(i);
           issues.push(issue)
-          console.log("All Issues", issue);
+          // console.log("All Issues", issue);
         }
         setAllIssues(issues)
       } else {
@@ -261,7 +263,7 @@ export const DebountyProvider = ({ children }) => {
       }
     } catch (error) {
       console.log(error);
-    } 
+    }
   }
 
   //fetch a single Issue
@@ -276,8 +278,8 @@ export const DebountyProvider = ({ children }) => {
       }
     } catch (error) {
       console.log(error);
-    } 
-  }  
+    }
+  }
 
   //post solution
   const postSolution = async (formData) => {
@@ -319,7 +321,7 @@ export const DebountyProvider = ({ children }) => {
       }
     } catch (error) {
       console.log(error);
-    }     
+    }
   }
 
   //Accept the proposed solution to an issue by the company with solution id and issueId
@@ -333,7 +335,7 @@ export const DebountyProvider = ({ children }) => {
       }
     } catch (error) {
       console.log(error);
-    }         
+    }
   }
 
   useEffect(() => {
@@ -363,6 +365,7 @@ export const DebountyProvider = ({ children }) => {
         checkValidHunter,
         checkValidCompany,
         validCompany,
+        company,
         logout,
         checkWalletConnection,
         registerHunter,
@@ -372,7 +375,8 @@ export const DebountyProvider = ({ children }) => {
         allIssues,
         getAllProposedSolution,
         fetchIssue,
-        acceptProposedSolution
+        acceptProposedSolution,
+        issueCount
       }}
     >
       {children}

@@ -11,6 +11,7 @@ import PostSolution from './pages/PostSolution/Index'
 import Solution from './pages/Solutions/Solutions'
 import {HunterProtectedRoute, CompanyProtectedRoute} from './pages/ProtectedRoutes/Index'
 import IssuePage from './pages/IssuePage/Index'
+import Dashboard from './pages/Dashboard/Index'
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
         <Route path="/all-issues/:id" element={<IssuePage/>}/>
         <Route path="/post-solution/:id" element={<HunterProtectedRoute><PostSolution/></HunterProtectedRoute>}/>        
         <Route path="/solutions/:id" element={<CompanyProtectedRoute><Solution/></CompanyProtectedRoute>}/>        
+        <Route path="/dashboard" element={<Dashboard/>}/>
         <Route path="*" element={<ErrorPage/>}/>
       </Routes>
     </Router>

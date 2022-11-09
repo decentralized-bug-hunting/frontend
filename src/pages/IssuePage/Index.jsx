@@ -9,7 +9,8 @@ const IssuePage
         const [loading, setLoading] = useState(false)
         const [issue, setIssue] = useState([])
         const [reward, setReward] = useState(0)
-        const {fetchIssue, validHunter, validCompany} = useContext(DebountyContext)
+        const {fetchIssue, validHunter, validCompany, currentAccount} = useContext(DebountyContext)
+        const [owner, setOwner] = useState(false)
         const params = useParams();
         useEffect(() => {
             const getIssue = async () => {
@@ -18,6 +19,9 @@ const IssuePage
                 setIssue(issue)
                 setReward(issue.reward.toString()/1000000000000000000)
                 setLoading(false)
+                if(currentAccount == issue.creator.toLowerCase()){
+                    setOwner(true)
+                }
             }
             getIssue()
         }, [params.id])
@@ -45,7 +49,7 @@ const IssuePage
                     }
                     <div className="buttons">
                         {validHunter && <Link to={`/post-solution/${issue.id}`}><button>Post Solution</button></Link>}
-                        {validCompany && <Link to={`/solutions/${issue.id}`} ><button onClick={() => {console.log(issue.id.toString())}}>View all solutions</button></Link>}
+                        {(validCompany && owner ) && <Link to={`/solutions/${issue.id}`} ><button onClick={() => {console.log(issue.id.toString())}}>View all solutions</button></Link>}
                     </div>
                 </div>
             </div>
