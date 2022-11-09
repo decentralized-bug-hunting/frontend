@@ -23,7 +23,7 @@ function App() {
         <Route path="/issue" element={<CompanyProtectedRoute><Issue/></CompanyProtectedRoute>}/>
         <Route path="/all-issues" element={<AllIssues/>}/>
         <Route path="/all-issues/:id" element={<IssuePage/>}/>
-        <Route path="/post-solution" element={<HunterProtectedRoute><PostSolution/></HunterProtectedRoute>}/>        
+        <Route path="/post-solution/:id" element={<HunterProtectedRoute><PostSolution/></HunterProtectedRoute>}/>        
         <Route path="/solutions/:id" element={<CompanyProtectedRoute><Solution/></CompanyProtectedRoute>}/>        
         <Route path="*" element={<ErrorPage/>}/>
       </Routes>

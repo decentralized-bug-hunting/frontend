@@ -2,11 +2,14 @@ import React, { useState, useContext } from "react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import "../Issue/Issue.css";
+import {useParams} from 'react-router-dom'
 import {DebountyContext} from '../../context/DeBountyContext'
 
 function PostSolution() {
+  const params = useParams()
+  const {id} = params;
   const [solution, setSolution] = useState({
-    issueId: "",
+    issueId: id,
     description: ""
   });
 
@@ -40,6 +43,7 @@ function PostSolution() {
                 placeholder="Issue ID"
                 onChange={handleChange}
                 value={solution.issueId}
+                disabled
               />
             </div>
             <div>

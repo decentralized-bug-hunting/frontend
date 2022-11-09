@@ -8,6 +8,7 @@ const IssuePage
     = () => {
         const [loading, setLoading] = useState(false)
         const [issue, setIssue] = useState([])
+        const [reward, setReward] = useState(0)
         const {fetchIssue, validHunter, validCompany} = useContext(DebountyContext)
         const params = useParams();
         useEffect(() => {
@@ -15,16 +16,12 @@ const IssuePage
                 setLoading(true)
                 let issue = await fetchIssue(params.id)
                 setIssue(issue)
-                console.log(issue);
+                setReward(issue.reward.toString()/1000000000000000000)
                 setLoading(false)
             }
             getIssue()
         }, [params.id])
         console.log(issue);
-
-        const viewSolutions = () => {
-
-        }
         return (
             <>
             <Navbar/>
@@ -42,14 +39,13 @@ const IssuePage
                                 <h2>{issue.title}</h2>
                                 <p>{issue.description}</p>
                                 <p>Creator: {issue.creator}</p>
-
-                                {/* <p>Reward: {issue.reward.toString()}</p> */}
+                                <p>{reward} eth</p>
                             </>
                         )
                     }
                     <div className="buttons">
-                        {validHunter && <button>Post solution</button>}
-                        {validCompany && <Link to={`/soltions/${issueId}`} ><button onClick={() => {console.log(issue.id.toString())}}>View all solutions</button></Link>}
+                        {validHunter && <Link to={`/post-solution/${issue.id}`}><button>Post Solution</button></Link>}
+                        {validCompany && <Link to={`/solutions/${issue.id}`} ><button onClick={() => {console.log(issue.id.toString())}}>View all solutions</button></Link>}
                     </div>
                 </div>
             </div>
