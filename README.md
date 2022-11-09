@@ -12,5 +12,5 @@ This project is created with React JS and bootstrapped with Vite. To run this pr
 - [ ] Create a dashboard page for hunter and company to display respective solutions and issues posted
 - [ ] Reformat user registration fields (display wallet address and use only `name` field)
 - [ ] Add NFT uploading Field on Company registration
-- [ ] Add image upload field on post issue
+- [ ] Add image upload field on post issue in place of `hash of nft` field
 - [ ] Add styling on `Solutions`, `IssuePage` pages
