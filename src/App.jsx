@@ -10,6 +10,7 @@ import Getstarted from './pages/login/getstarted'
 import PostSolution from './pages/PostSolution/Index'
 import Solution from './pages/Solutions/Solutions'
 import {HunterProtectedRoute, CompanyProtectedRoute} from './pages/ProtectedRoutes/Index'
+import IssuePage from './pages/IssuePage/Index'
 
 function App() {
 
@@ -21,8 +22,9 @@ function App() {
         <Route path="/getstarted" element={<Getstarted/>}/>
         <Route path="/issue" element={<CompanyProtectedRoute><Issue/></CompanyProtectedRoute>}/>
         <Route path="/all-issues" element={<AllIssues/>}/>
+        <Route path="/all-issues/:id" element={<IssuePage/>}/>
         <Route path="/post-solution" element={<HunterProtectedRoute><PostSolution/></HunterProtectedRoute>}/>        
-        <Route path="/solutions" element={<CompanyProtectedRoute><Solution/></CompanyProtectedRoute>}/>        
+        <Route path="/solutions/:id" element={<CompanyProtectedRoute><Solution/></CompanyProtectedRoute>}/>        
         <Route path="*" element={<ErrorPage/>}/>
       </Routes>
     </Router>

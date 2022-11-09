@@ -23,7 +23,7 @@ function AllIssues() {
           {
             allIssues.map(issue => {
               return <div key={issue.id}>
-                <IssueCard title={issue.title} description={issue.description} reward={(issue.reward.toString()/1000000000000000000)} company={issue.creator}/>
+                <IssueCard id={issue.id} title={issue.title} description={issue.description} reward={(issue.reward.toString()/1000000000000000000)} company={issue.creator}/>
               </div>
             })
           }

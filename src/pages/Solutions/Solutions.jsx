@@ -1,11 +1,13 @@
 import React, {useState, useEffect, useContext} from "react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
+import {useParams} from 'react-router-dom'
 // import IssueCard from "./IssueCard";
 // import "./AllIssues.css";
 import {DebountyContext} from '../../context/DeBountyContext'
 
 function Solution() {
+  const params = useParams()
   const [solutions, setSolutions] = useState([])
   const [issue, setIssue] = useState([])
   const [isLoading, setIsLoading] = useState(false)
@@ -14,8 +16,8 @@ function Solution() {
   useEffect(() => {
     const fetchSolns = async () => {
         setIsLoading(true)
-        let solns=  await getAllProposedSolution(0);
-        let issue = await fetchIssue(solns[0].issueID.toString());
+        let solns=  await getAllProposedSolution(params.id);
+        let issue = await fetchIssue(params.id);
         setIssue(issue)
         setSolutions(solns)
         setIsLoading(false)
@@ -33,6 +35,11 @@ function Solution() {
             isLoading && (
                 <h2>Loading...</h2>
             )
+        }
+        {
+          solutions.length == 0 && (
+            <h2 style={{margin: '10rem 0'}}>No Solutions found at the moment</h2>
+          )
         }
         {
             solutions.map(solution => {

@@ -1,14 +1,17 @@
 import React from "react";
 import './IssueCard.css'
+import {Link} from 'react-router-dom'
 import companyIcon from '../../assets/brands/company-icon.png'
 import rewardIcon from '../../assets/brands/reward.svg'
 
-function IssueCard({title, description, reward, company}) {
+function IssueCard({id, title, description, reward, company}) {
   return (
     <>
       <div className="issue-card">
         <div className="issue-intro">
-          <h3>{title}</h3>
+          <Link to={`${id}`}>
+            <h3>{title}</h3>
+          </Link>
           <p>
             {description}
           </p>

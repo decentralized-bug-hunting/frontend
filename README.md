@@ -7,7 +7,7 @@ This project is created with React JS and bootstrapped with Vite. To run this pr
 3. Run `npm run dev` to start the project locally on your localhost. 
 
 ## To Dos:
-- [ ] Add protected routes for hunter, company and admin
+- [X] Add protected routes for hunter, company and admin
 - [X] Create a page for company to view all the Proposed solutions to an issue (added a dummy route with dummy issueId)
 - [ ] Add the contexts for :
 
