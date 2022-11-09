@@ -12,6 +12,12 @@ nav .menu {
     align-items: center;
     justify-content: center;
 }
+nav .menu .menuItems a{
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 400;
+}
 
 nav .left_logo img{
     width: 60%;    

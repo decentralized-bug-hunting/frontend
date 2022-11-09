@@ -91,7 +91,7 @@ function Getstarted() {
 
               {validHunter ? (
                 <>
-                  <Link to="/all-issues" className="btn btn-primary">
+                  <Link to="/dashboard" className="btn btn-primary">
                     {" "}
                     Go to Dashboard
                   </Link>
@@ -110,7 +110,7 @@ function Getstarted() {
               <h2>We are a Company</h2>
               {validCompany ? (
                 <>
-                  <Link to="/companies" className="btn btn-primary">
+                  <Link to="/dashboard" className="btn btn-primary">
                     {" "}
                     Go to Dashboard
                   </Link>

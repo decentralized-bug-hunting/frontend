@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import logo from "../assets/logo-new.png";
 import { DebountyContext } from "../context/DeBountyContext";
-import {Link} from 'react-router-dom'
+import {NavLink, Link} from 'react-router-dom'
 import "./Navbar.css";
 function Navbar() {
   const [stickyClass, setStickyClass] = useState("");
@@ -26,9 +26,9 @@ function Navbar() {
       </div>
       <div className="menu">
         <ul className="menuItems">
-          <li>Home</li>
-          <li>About</li>
-          <li>Company</li>
+          <li><NavLink to="/">Home</NavLink></li>
+          <li><NavLink to="/all-issues">All Issues</NavLink></li>
+          <li><NavLink to="/getstarted">Get started</NavLink></li>
         </ul>
         
         {currentAccount ? (
