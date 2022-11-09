@@ -348,6 +348,8 @@ export const DebountyProvider = ({ children }) => {
     getCompany()
     issueCount()
     fetchAllIssues()
+    checkValidCompany()
+    checkValidHunter()
     // getAllProposedSolution(0)
   }, []);
 

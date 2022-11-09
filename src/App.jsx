@@ -9,6 +9,7 @@ import AllIssues from './pages/AllIssues/AllIssues'
 import Getstarted from './pages/login/getstarted'
 import PostSolution from './pages/PostSolution/Index'
 import Solution from './pages/Solutions/Solutions'
+import {HunterProtectedRoute, CompanyProtectedRoute} from './pages/ProtectedRoutes/Index'
 
 function App() {
 
@@ -17,11 +18,11 @@ function App() {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/companies" element={<Companies/>}/>
-        <Route path="/issue" element={<Issue/>}/>
         <Route path="/getstarted" element={<Getstarted/>}/>
+        <Route path="/issue" element={<CompanyProtectedRoute><Issue/></CompanyProtectedRoute>}/>
         <Route path="/all-issues" element={<AllIssues/>}/>
-        <Route path="/post-solution" element={<PostSolution/>}/>        
-        <Route path="/solutions" element={<Solution/>}/>        
+        <Route path="/post-solution" element={<HunterProtectedRoute><PostSolution/></HunterProtectedRoute>}/>        
+        <Route path="/solutions" element={<CompanyProtectedRoute><Solution/></CompanyProtectedRoute>}/>        
         <Route path="*" element={<ErrorPage/>}/>
       </Routes>
     </Router>
