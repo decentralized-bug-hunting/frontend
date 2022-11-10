@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;500;600;700;800;1000&display=swap');
+
+
+.company_details{
+    display: flex;
+    flex-direction: row;
+    padding-top: 5rem;
+    padding-bottom: 2rem;
+}
+
+.company_details .right{
+    padding-left: 4rem;
+    font-family: Montserrat;
+
+}
+
+.company_details .right h2{
+    font-size: 1.6rem;
+    font-family: Montserrat;
+    letter-spacing: 0.03em;
+
+
+}
+
+.company_details .right h3{
+    font-family: Montserrat;
+    font-weight: 500;
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+    color:#FC724D;
+}
+
+.company_details .right .right-top{
+    padding-bottom: 10px;
+}
+
+.company_details .right .right-bottom h2{
+    font-family: Montserrat;
+    font-size: 1.3em;
+    font-weight: 500;
+}
+
+.company_details .right .right-bottom h4{
+    font-family: Montserrat;
+    font-weight:400;
+    font-size: 1em;
+}
+
+.company_details .right .right-bottom h4 span{
+    font-weight: 500;
+}
+
+
+.company_dashboard_issues{
+    display: flex;
+    justify-content: space-around;
+    margin: 2rem 0;
+    border:1px solid rgb(211, 207, 207);
+    border-radius: 10px;
+    transition: transform .3s;
+    padding:20px;
+    color:#FC724D
+}
+
+.company_dashboard_issues:hover{
+    transform: scale(1.01);
+
+
+}
+
+a{
+    text-decoration: none;
+}
+.company_dashboard_issues .issue_desp{
+    width:40%;
+}
