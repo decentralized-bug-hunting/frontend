@@ -5,7 +5,7 @@ import {NavLink, Link} from 'react-router-dom'
 import "./Navbar.css";
 function Navbar() {
   const [stickyClass, setStickyClass] = useState("");
-  const { connectWallet, currentAccount, logout } = useContext(DebountyContext);
+  const { connectWallet, currentAccount, logout, validHunter, validCompany } = useContext(DebountyContext);
 
   useEffect(() => {
     window.addEventListener("scroll", stickNavbar);
@@ -29,6 +29,11 @@ function Navbar() {
           <li><NavLink to="/">Home</NavLink></li>
           <li><NavLink to="/all-issues">All Issues</NavLink></li>
           <li><NavLink to="/getstarted">Get started</NavLink></li>
+          {
+            (validCompany || validHunter) && (
+              <li><NavLink to="/dashboard">Dashboard</NavLink></li>
+            )
+          }
         </ul>
         
         {currentAccount ? (

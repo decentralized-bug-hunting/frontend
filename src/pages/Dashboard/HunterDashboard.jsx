@@ -40,7 +40,7 @@ const HunterDashboard = () => {
       <h1>Solutions you have proposed</h1>
       {
         mysolns.length == 0 && (
-          <h3>No solutions posted by the user. Check <Link to="/all-issues">all issues</Link> to post an issue.</h3>
+          <h3>No solutions posted by the user. Check <Link to="/all-issues">all issues</Link> to post a solution to the issue.</h3>
         )
       }
       {

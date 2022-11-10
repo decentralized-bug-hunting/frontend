@@ -50,8 +50,8 @@ const IssuePage
                         )
                     }
                     <div className="buttons">
-                        {validHunter && <Link to={`/post-solution/${issue.id}`}><button>Post Solution</button></Link>}
-                        <Link to={`/solutions/${issue.id}`} ><button style={{marginLeft:'0.6rem'}} onClick={() => {console.log(issue.id.toString())}}>View all solutions</button></Link>
+                        {validHunter && <Link to={`/post-solution/${issue.id}`}><button style={{marginRight:'0.6rem'}}>Post Solution</button></Link>}
+                        <Link to={`/solutions/${issue.id}`} ><button onClick={() => {console.log(issue.id.toString())}}>View all solutions</button></Link>
                     </div>
                 </div>
             </div>
