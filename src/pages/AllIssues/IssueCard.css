@@ -34,9 +34,11 @@
 }
 
 .issue-card .company-img img{
+    display: block;
     width: 50px;
     height: 50px;
-    margin-right: 1rem;
+    /* margin-right: 1rem; */
+    margin: 0 auto;
 }
 
 .issue-card .additional-info{
@@ -52,4 +54,15 @@
 .issue-card .reward-icon{
     width: 50px;
     height: 50px;
+}
+
+.issue-card .status-common{
+    margin: 1rem 0 0 0;
+    width: 6rem;
+    padding: 0.6rem;
+}
+
+.issue-card .Posted{
+    background-color: aqua;
+    /* padding: 1rem; */
 }

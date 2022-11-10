@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 import companyIcon from '../../assets/brands/company-icon.png'
 import rewardIcon from '../../assets/brands/reward.svg'
 
-function IssueCard({id, title, description, reward, company}) {
+function IssueCard({id, title, description, reward, company, status}) {
   return (
     <>
       <div className="issue-card">
@@ -15,6 +15,7 @@ function IssueCard({id, title, description, reward, company}) {
           <p>
             {description}
           </p>
+          <p className={`${status} status-common`}>{status}</p>
           <div className="additional-info">
             <div className='company-img'>
               <img src={companyIcon} alt="Company icon" />
