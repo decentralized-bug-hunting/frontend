@@ -82,3 +82,45 @@
 .hunterdashboard .right .right-bottom h4 span{
     font-weight: 500;
 }
+
+
+.huntersolutions{
+    border:1px solid rgb(173, 168, 168);
+    padding:10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.huntersolutions h2{
+    font-family: Mulish;
+    font-weight: 500;
+    font-size: 1rem;
+    letter-spacing: 0.03em;
+    line-height: 20px;
+}
+
+.huntersolutions button{
+    padding:10px 30px;
+    background-color: #272835;
+    color:white;
+    font-family: Mulish;
+    font-weight: 500;
+    border: none;
+    border-radius: 5px;
+    margin-top: 15px;
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+}
+
+.huntersolutions button:hover{
+    cursor: pointer;
+}
+
+.hunterss h1{
+    font-family: Mulish;
+    font-weight: 700;
+    font-size: 23px;
+    padding:10px 0;
+    letter-spacing: 0.03rem;
+
+}

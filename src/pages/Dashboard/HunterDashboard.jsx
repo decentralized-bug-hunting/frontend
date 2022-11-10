@@ -36,17 +36,38 @@ const HunterDashboard = () => {
           </div>
         </div>
       </div>
+      <div className='hunterss'>
+      <h1>Solutions you have proposed</h1>
       {
-        mysolns.map(soln => {
-          return (
-            <div key={soln.id.toString()}>
-              <h2>{soln.solutionDescription} on issue #<Link to={`/all-issues/${soln.issueID.toString()}`}>{soln.issueID.toString()}</Link></h2>
-            </div>
+      mysolns.map(soln => {
+      return (
+            
+              
+              <div className='huntersolutions' key={soln.id.toString()}>
+                <h2>{soln.solutionDescription}</h2>
+                  <Link to={`/all-issues/${soln.issueID.toString()}`}><button>Go to Issue</button></Link>
+              </div>
+            
           )
-        })
-      }
+             })
+           }
+        
+      
+    </div>
     </div>
   )
 }
 
 export default HunterDashboard
+
+
+
+// {
+//   mysolns.map(soln => {
+//     return (
+//       <div key={soln.id.toString()}>
+//         <h2>{soln.solutionDescription} on issue #<Link to={`/all-issues/${soln.issueID.toString()}`}>{soln.issueID.toString()}</Link></h2>
+//       </div>
+//     )
+//   })
+// }
