@@ -38,3 +38,7 @@
 .issue-content button:hover{
     cursor: pointer;
 }
+
+.issue-title{
+    text-transform: capitalize;
+}

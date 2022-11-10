@@ -42,7 +42,7 @@ const IssuePage
                     {
                         (!loading && issue) && (
                             <>
-                                <h2>{issue.title}</h2>
+                                <h2 className='issue-title'>{issue.title}</h2>
                                 <p>{issue.description}</p>
                                 <p><span>Created by:</span> {issue.creator}</p>
                                 <p><span>Reward offered:</span> {reward} eth</p>

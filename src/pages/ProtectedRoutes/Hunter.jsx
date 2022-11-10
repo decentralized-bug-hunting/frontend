@@ -11,7 +11,7 @@ const HunterProtectedRoute = ({ children }) => {
             <Navbar />
             <div className="container">
                 <div className="content" style={{ textAlign: 'center', margin: '10rem 0' }}>
-                    <h2>You need to be a registred as a hunter to access this path.</h2>
+                    <h2>You need to be a registered as a hunter to access this path.</h2>
                     <Link to="/">Go back to Home</Link>
                 </div>
             </div>

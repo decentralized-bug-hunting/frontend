@@ -38,7 +38,7 @@ const CompanyDashboard = () => {
                 <Link to={`/all-issues/${issue.id}`}>
                 <div className='company_dashboard_issues'>
                   
-                    <h3>{issue.title}</h3>
+                    <h3 className='issue-title'>{issue.title}</h3>
                   <p className='issue_desp'>
                     {issue.description}
                   </p>

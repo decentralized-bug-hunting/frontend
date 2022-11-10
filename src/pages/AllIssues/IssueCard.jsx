@@ -11,12 +11,12 @@ function IssueCard({id, title, description, reward, company, status}) {
       <div className="issue-card">
         <div className="issue-intro">
           
-            <h3>{title}</h3>
+            <h3 className="issue-title">{title}</h3>
           
           <p>
             {description}
           </p>
-          <p ><span>Status: &nbsp;</span><span className={`${status} status-common`}>{status}</span></p>
+          <p style={{margin:'0.7rem 0'}}><span>status: &nbsp;</span><span className={`${status} status-common`}>{status}</span></p>
           <div className="additional-info">
             <div className='company-img'>
               <img src={companyIcon} alt="Company icon" />
