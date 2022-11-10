@@ -71,10 +71,12 @@ function Getstarted() {
       setLogoID(cid);
       console.log("Stored files with cid:", cid);
       const logoUrl = `https://ipfs.io/ipfs/${cid}/${fileName}`;
-      const desc = "NFT for hunters of DeBounty";
+      const desc = `DeBounty NFT for hunters of ${formData.name}`;
+      const name = "DeBounty NFT";
       const tokenData = JSON.stringify({
         image: logoUrl,
         description: desc,
+        name: name,
       });
       const tokenDataFile = new File([tokenData], "metadata", {
         type: "json",

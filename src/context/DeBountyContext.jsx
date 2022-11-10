@@ -26,11 +26,10 @@ export const DebountyProvider = ({ children }) => {
   const [currentAccount, setCurrentAccount] = useState("");
   const [validHunter, setValidHunter] = useState(false);
   const [validCompany, setValidCompany] = useState(false);
-  const [allIssues, setAllIssues] = useState([])
+  const [allIssues, setAllIssues] = useState([]);
   const [company, setCompany] = useState([]);
   const [hunter, setHunter] = useState("");
-  const [allProposedSolutions, setAllProposedSolutions] = useState([])
-
+  const [allProposedSolutions, setAllProposedSolutions] = useState([]);
 
   const connectWallet = async () => {
     try {
@@ -61,7 +60,7 @@ export const DebountyProvider = ({ children }) => {
       if (ethereum) {
         const deBountyContract = createEthereumContract();
         const hunter = await deBountyContract.getHunter();
-        setHunter(hunter[0])
+        setHunter(hunter[0]);
         console.log("Hunter : ", hunter);
       } else {
         console.log("Ethereum is not present");
@@ -318,7 +317,8 @@ export const DebountyProvider = ({ children }) => {
     try {
       if (ethereum) {
         const deBountyContract = createEthereumContract();
-        const allProposedSolutions = await deBountyContract.getAllProposedSolutions();
+        const allProposedSolutions =
+          await deBountyContract.getAllProposedSolutions();
         setAllProposedSolutions(allProposedSolutions);
         console.log("All Proposed Solutions", allProposedSolutions);
         // return allProposedSolutions
@@ -343,7 +343,7 @@ export const DebountyProvider = ({ children }) => {
   //     }
   //   } catch (error) {
   //     console.log(error);
-  //   }    
+  //   }
   // }
 
   //Accept the proposed solution to an issue by the company with solution id and issueId
@@ -351,7 +351,9 @@ export const DebountyProvider = ({ children }) => {
     try {
       if (ethereum) {
         const deBountyContract = createEthereumContract();
-        await deBountyContract.acceptProposedSolution(proposedSolnID);
+        await deBountyContract.acceptProposedSolution(proposedSolnID, {
+          gasLimit: 300000,
+        });
       } else {
         console.log("Ethereum is not present");
       }
@@ -369,13 +371,13 @@ export const DebountyProvider = ({ children }) => {
       setLoggedIn(JSON.parse(localStorage.getItem("loggedIn")).entry);
       setCurrentAccount(localStorage.getItem("currentAccount"));
     }
-    getCompany()
-    issueCount()
-    fetchAllIssues()
-    checkValidCompany()
-    checkValidHunter()
-    getHunter()
-    getAllProposedSolutions()
+    getCompany();
+    issueCount();
+    fetchAllIssues();
+    checkValidCompany();
+    checkValidHunter();
+    getHunter();
+    getAllProposedSolutions();
     // getAllProposedSolution(0)
   }, []);
 
@@ -402,7 +404,7 @@ export const DebountyProvider = ({ children }) => {
         acceptProposedSolution,
         issueCount,
         hunter,
-        allProposedSolutions
+        allProposedSolutions,
       }}
     >
       {children}
