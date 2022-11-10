@@ -16,7 +16,7 @@ function IssueCard({id, title, description, reward, company, status}) {
           <p>
             {description}
           </p>
-          <p className={`${status} status-common`}><span>Status: &nbsp;</span>{status}</p>
+          <p ><span>Status: &nbsp;</span><span className={`${status} status-common`}>{status}</span></p>
           <div className="additional-info">
             <div className='company-img'>
               <img src={companyIcon} alt="Company icon" />
