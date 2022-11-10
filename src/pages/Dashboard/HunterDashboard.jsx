@@ -32,9 +32,7 @@ const HunterDashboard = () => {
           <div className='right-bottom'>
             <h2>About</h2>
             <hr style={{ marginBottom: '10px' }} />
-            <h4><span>Phone:</span>&nbsp; 9845956700</h4>
-            <h4><span>E-mail:</span>&nbsp; hunter@gmail.com</h4>
-            <h4><span>Solutions Posted:</span>&nbsp; 2</h4>
+            <h4><span>Wallet:</span>&nbsp; {currentAccount}</h4>
           </div>
         </div>
       </div>
