@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap');
+
+.hunterdashboard{
+    margin-top: 60px;
+}
+
+.hunterdashboard .title {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+  
+  .hunterdashboard .title h4 {
+    width: 100%;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 19px;
+    color: #8f92a1;
+    font-family: "Open Sans";
+    letter-spacing:0.01em;
+
+  }
+  
+  .hunterdashboard .title h2 {
+    font-family: "Open Sans";
+    width: 100%;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    letter-spacing:0.01em;
+    color: #272835;
+  }
+
+
+  .hunterdashboard .data{
+    display: flex;
+    flex-direction: row;
+    padding-top: 5rem;
+    padding-bottom: 2rem;
+  }
+
+
+.hunterdashboard .right{
+    padding-left: 4rem;
+    font-family: Montserrat;
+
+}
+
+.hunterdashboard .right h2{
+    font-size: 1.6rem;
+    font-family: Montserrat;
+    letter-spacing: 0.03em;
+
+
+}
+
+.hunterdashboard .right h3{
+    font-family: Montserrat;
+    font-weight: 500;
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+    color:#FC724D;
+}
+
+.hunterdashboard .right .right-top{
+    padding-bottom: 10px;
+}
+
+.hunterdashboard .right .right-bottom h2{
+    font-family: Montserrat;
+    font-size: 1.3em;
+    font-weight: 500;
+}
+
+.hunterdashboard .right .right-bottom h4{
+    font-family: Montserrat;
+    font-weight:400;
+    font-size: 1em;
+}
+
+.hunterdashboard .right .right-bottom h4 span{
+    font-weight: 500;
+}
