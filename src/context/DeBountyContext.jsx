@@ -347,11 +347,11 @@ export const DebountyProvider = ({ children }) => {
   // }
 
   //Accept the proposed solution to an issue by the company with solution id and issueId
-  const acceptProposedSolution = async (proposedSolnID, issueId) => {
+  const acceptProposedSolution = async (proposedSolnID) => {
     try {
       if (ethereum) {
         const deBountyContract = createEthereumContract();
-        await deBountyContract.acceptProposedSolution(proposedSolnID, issueId);
+        await deBountyContract.acceptProposedSolution(proposedSolnID);
       } else {
         console.log("Ethereum is not present");
       }

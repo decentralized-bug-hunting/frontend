@@ -50,7 +50,7 @@ function Solution() {
                         <p>{solution.solutionDescription}</p>
                         <p><span>Proposed by:&nbsp;</span>{solution.proposer}</p>
                         <p><span>Status:&nbsp;</span> {status[solution.status]}</p>
-                        <button onClick={() => acceptProposedSolution(id, issueID)}>Accept Proposed Solution </button>
+                        <button onClick={() => acceptProposedSolution(id.toString())}>Accept Proposed Solution </button>
                     </div>
                 
             
