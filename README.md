@@ -9,8 +9,8 @@ This project is created with React JS and bootstrapped with Vite. To run this pr
 ## To Dos:
 - [X] Add protected routes for hunter, company and admin
 - [X] Create a page for company to view all the Proposed solutions to an issue
-- [ ] Create a dashboard page for hunter and company to display respective solutions and issues posted
+- [X] Create a dashboard page for hunter and company to display respective solutions and issues posted
 - [X] Reformat user registration fields (display wallet address and use only `name` field)
 - [X] Add NFT uploading Field on Company registration
-- [] ~~Add image upload field on post issue in place of `hash of nft` field~~
+- [ ] ~~Add image upload field on post issue in place of `hash of nft` field~~
 - [X] Add styling on `Solutions`, `IssuePage` pages
