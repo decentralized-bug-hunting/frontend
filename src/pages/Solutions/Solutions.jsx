@@ -47,6 +47,7 @@ function Solution() {
                           return (
            
                     <div className="solutions" key={solution.id}>
+                        <h3>Solutions #{solution.id.toString()}</h3>
                         <p>{solution.solutionDescription}</p>
                         <p><span>Proposed by:&nbsp;</span>{solution.proposer}</p>
                         <p><span>Status:&nbsp;</span> {status[solution.status]}</p>
