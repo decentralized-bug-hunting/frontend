@@ -1,0 +1,44 @@
+.solutioncontainer{
+    padding:4rem;
+}
+
+
+.solutioncontainer h3{
+    color:#FC724D;
+    font-size:1rem;
+
+}
+
+
+.solutioncontainer h2 {
+    font-size: 2rem;
+    color: #252B42;
+    margin-bottom: 40px;
+}
+
+.solutions{
+    border:1px solid rgb(201, 200, 200);
+    padding:20px;
+    border-radius: 10px;
+    line-height:1.5rem;;
+}
+
+.solutions span{
+    font-weight: 500;
+}
+
+.solutions button{
+    border:none;
+    background-color: #252B42;
+    color:white;
+    padding:10px 20px;
+    margin-top: 15px;
+    border-radius: 5px;
+    letter-spacing: 0.04em;
+    font-family: Mulish;
+    font-weight: 500;
+}
+
+.solutions button:hover{
+    cursor: pointer;
+}
