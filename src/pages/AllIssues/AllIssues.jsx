@@ -14,7 +14,9 @@ function AllIssues() {
       <Navbar />
       <div className="container">
         <div className="issues-container">
-          <h2>&gt; All Issues</h2>
+          <h4>Issues</h4>
+          <h2>Company Issues</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation. </p>
           {
             allIssues.length == 0 && (
                (

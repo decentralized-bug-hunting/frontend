@@ -7,11 +7,12 @@ import rewardIcon from '../../assets/brands/reward.svg'
 function IssueCard({id, title, description, reward, company, status}) {
   return (
     <>
+    <Link to={`${id}`}>
       <div className="issue-card">
         <div className="issue-intro">
-          <Link to={`${id}`}>
+          
             <h3>{title}</h3>
-          </Link>
+          
           <p>
             {description}
           </p>
@@ -26,10 +27,11 @@ function IssueCard({id, title, description, reward, company, status}) {
         <div className="reward">
           <img src={rewardIcon} alt="reward icon" className="reward-icon" />
           <p className="reward">
-            <strong>Reward: </strong>{reward} eth
+            <strong>Reward:&nbsp;</strong>{reward} eth
           </p>
         </div>
       </div>
+      </Link>
       <hr />
     </>
   );

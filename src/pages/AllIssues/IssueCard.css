@@ -1,18 +1,35 @@
+a{
+    text-decoration: none;
+}
+
+
 .issue-card{
     display: flex;
     justify-content: space-around;
-    margin: 1rem 0;
-    padding: 1rem;
+    margin: 2rem 0;
+    border:1px solid rgb(211, 207, 207);
+    border-radius: 10px;
+    transition: transform .3s;
+    padding:20px;
+}
+
+.issue-card:hover{
+    scale: 1.01;
+    transform: scale(1.006);
 }
 
 .issue-card h3{
-    color: royalblue;
-    margin-bottom: 1rem;
-    font-size: 1.6rem;
+    color: #24242E;
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+    
+
 }
 
+
+
 .issue-card p {
-    color: #6b6a6a;
+    color: #24242E;
     font-size: 1.2rem;
 }
 
@@ -22,7 +39,7 @@
 }
 
 .issue-card .reward{
-    color: black;
+    color: #24242E;
 }
 
 .issue-card .company-img{
@@ -31,6 +48,11 @@
     margin-top: 1.6rem;
     margin-right: 2.6rem;
     /* justify-content: center; */
+}
+
+.issue-card .company-img p{
+    color: #24242E;
+
 }
 
 .issue-card .company-img img{
