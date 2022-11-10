@@ -1,6 +1,8 @@
 import React, { useState, useContext, useEffect } from "react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
+import { Web3Storage } from "web3.storage";
+import { API_TOKEN } from "../../utils/constants";
 
 import "./getstarted.css";
 import { BsFillBugFill } from "react-icons/bs";
@@ -33,10 +35,11 @@ function Getstarted() {
 
   const initialdata = {
     name: "",
-    email: "",
-    phone: "",
   };
   const [formvalue, setFormvalue] = useState(initialdata);
+  const [file, setFile] = useState("");
+  const [fileName, setFileName] = useState("");
+  const [logoID, setLogoID] = useState("");
 
   const handleinputChange = (e) => {
     var { name, value } = e.target;
@@ -46,6 +49,45 @@ function Getstarted() {
     });
     console.log(formvalue);
   };
+
+  // Take file input from user
+  const captureFile = (event) => {
+    event.preventDefault();
+    const fileInput = event.target;
+    setFileName(fileInput.files[0].name);
+    setFile(fileInput.files[0]);
+  };
+
+  function makeStorageClient() {
+    return new Web3Storage({ token: API_TOKEN });
+  }
+
+  // upload file in ipfs
+  async function storeFile(formData) {
+    try {
+      const client = makeStorageClient();
+      const cid = await client.put([file]);
+      setLogoID(cid);
+      console.log("Stored files with cid:", cid);
+      const logoUrl = `https://ipfs.io/ipfs/${cid}/${fileName}`;
+      const desc = "NFT for hunters of DeBounty";
+      const tokenData = JSON.stringify({
+        image: logoUrl,
+        description: desc,
+      });
+      const tokenDataFile = new File([tokenData], "metadata", {
+        type: "json",
+      });
+
+      const finalCID = await client.put([tokenDataFile]);
+      console.log("Final cid:", finalCID);
+      formData.nftMetadata = `https://ipfs.io/ipfs/${finalCID}/metadata`;
+      console.log("OKIEE--", formData);
+      registerCompany(formData);
+    } catch (error) {
+      console.log("Error storing files:", error);
+    }
+  }
 
   const handleHunterFormSubmit = (event) => {
     event.preventDefault();
@@ -63,12 +105,8 @@ function Getstarted() {
     const data = new FormData(event.currentTarget);
     const formData = {
       name: data.get("name"),
-      email: data.get("email"),
-      phone: data.get("phone"),
     };
-    console.log("OKIEE--", formData);
-    registerCompany(formData);
-    event.currentTarget.reset();
+    storeFile(formData);
   };
 
   return (
@@ -178,32 +216,20 @@ function Getstarted() {
                 />
               </div>
               <div className="input_field">
-                <h3>Company Email</h3>
+                <h3>Company Logo:</h3>
                 <input
-                  type="text"
-                  placeholder="Your Email Address"
-                  value={formvalue.email}
-                  name="email"
-                  onChange={handleinputChange}
-                  id="email"
-                />
-              </div>
-              <div className="input_field">
-                <h3>Company Contact Number:</h3>
-                <input
-                  type="text"
-                  placeholder="Your Phone Number"
-                  value={formvalue.phone}
-                  name="phone"
-                  onChange={handleinputChange}
-                  id="phone"
+                  type="file"
+                  accept="image/*"
+                  name="logo"
+                  onChange={captureFile}
+                  id="logo"
                 />
               </div>
 
               <div className="mbutton">
                 <input className="button" type="submit" value="Submit" />
               </div>
-              <div className="cross" onClick={() => showCompanyModal(false)}>
+              <div className="cross" onClick={() => showmodal(false)}>
                 <ImCross />
               </div>
             </form>

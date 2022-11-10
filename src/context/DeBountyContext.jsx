@@ -26,8 +26,8 @@ export const DebountyProvider = ({ children }) => {
   const [currentAccount, setCurrentAccount] = useState("");
   const [validHunter, setValidHunter] = useState(false);
   const [validCompany, setValidCompany] = useState(false);
-  const [allIssues, setAllIssues] = useState([])
-  const [company, setCompany] = useState([])
+  const [allIssues, setAllIssues] = useState([]);
+  const [company, setCompany] = useState([]);
 
   const connectWallet = async () => {
     try {
@@ -65,7 +65,7 @@ export const DebountyProvider = ({ children }) => {
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   //get logged in company details
   const getCompany = async () => {
@@ -74,14 +74,14 @@ export const DebountyProvider = ({ children }) => {
         const deBountyContract = createEthereumContract();
         const company = await deBountyContract.getCompany();
         console.log("Company : ", company);
-        setCompany(company)
+        setCompany(company);
       } else {
         console.log("Ethereum is not present");
       }
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   const logout = () => {
     localStorage.removeItem("loggedIn");
@@ -101,7 +101,7 @@ export const DebountyProvider = ({ children }) => {
         console.log("Wallet detected", ethereum);
       }
 
-      const accounts = await ethereum.request({ method: 'eth_accounts' })
+      const accounts = await ethereum.request({ method: "eth_accounts" });
 
       if (accounts.length !== 0) {
         const account = accounts[0];
@@ -148,10 +148,10 @@ export const DebountyProvider = ({ children }) => {
       if (ethereum) {
         console.log("Company reg form data", formData);
         const deBountyContract = createEthereumContract();
-        const { name, phone } = formData;
+        const { name, nftMetadata } = formData;
         const registerTxn = await deBountyContract.registerCompany(
           name,
-          phone,
+          nftMetadata,
           {
             gasLimit: 300000,
           }
@@ -159,6 +159,7 @@ export const DebountyProvider = ({ children }) => {
         console.log("Registering..wait", registerTxn.hash);
         await registerTxn.wait();
         console.log("Registration complete", registerTxn.hash);
+        window.location.href = "/dashboard";
       } else {
         console.log("Failed to connect to metamask wallet");
       }
@@ -212,7 +213,7 @@ export const DebountyProvider = ({ children }) => {
           hash,
           reward,
           {
-            value: reward
+            value: reward,
           }
         );
         console.log("Posting issue", postTxn.hash);
@@ -228,43 +229,43 @@ export const DebountyProvider = ({ children }) => {
     }
   };
 
-  //get total number of issues on contract 
+  //get total number of issues on contract
   const issueCount = async () => {
     try {
       if (ethereum) {
         const deBountyContract = createEthereumContract();
         const count = await deBountyContract.issueCount();
         console.log("Total num of Issues:", count.toString());
-        let number = Number(count.toString())
-        return number
+        let number = Number(count.toString());
+        return number;
       } else {
         console.log("Ethereum is not present");
       }
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   //Fetches all the issues on the contract
   const fetchAllIssues = async () => {
     try {
       if (ethereum) {
         const deBountyContract = createEthereumContract();
-        let count = await issueCount()
-        let issues = []
+        let count = await issueCount();
+        let issues = [];
         for (let i = 0; i < count; i++) {
           const issue = await deBountyContract.issues(i);
-          issues.push(issue)
+          issues.push(issue);
           // console.log("All Issues", issue);
         }
-        setAllIssues(issues)
+        setAllIssues(issues);
       } else {
         console.log("Ethereum is not present");
       }
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   //fetch a single Issue
   const fetchIssue = async (id) => {
@@ -272,14 +273,14 @@ export const DebountyProvider = ({ children }) => {
       if (ethereum) {
         const deBountyContract = createEthereumContract();
         const issue = await deBountyContract.issues(id);
-        return issue
+        return issue;
       } else {
         console.log("Ethereum is not present");
       }
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   //post solution
   const postSolution = async (formData) => {
@@ -313,16 +314,17 @@ export const DebountyProvider = ({ children }) => {
     try {
       if (ethereum) {
         const deBountyContract = createEthereumContract();
-        const allProposedSolutions = await deBountyContract.getAllProposedSolution(issueId);
+        const allProposedSolutions =
+          await deBountyContract.getAllProposedSolution(issueId);
         console.log("All Proposed Solutions", allProposedSolutions);
-        return allProposedSolutions
+        return allProposedSolutions;
       } else {
         console.log("Ethereum is not present");
       }
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   //Accept the proposed solution to an issue by the company with solution id and issueId
   const acceptProposedSolution = async (proposedSolnID, issueId) => {
@@ -336,7 +338,7 @@ export const DebountyProvider = ({ children }) => {
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   useEffect(() => {
     checkWalletConnection();
@@ -347,11 +349,11 @@ export const DebountyProvider = ({ children }) => {
       setLoggedIn(JSON.parse(localStorage.getItem("loggedIn")).entry);
       setCurrentAccount(localStorage.getItem("currentAccount"));
     }
-    getCompany()
-    issueCount()
-    fetchAllIssues()
-    checkValidCompany()
-    checkValidHunter()
+    getCompany();
+    issueCount();
+    fetchAllIssues();
+    checkValidCompany();
+    checkValidHunter();
     // getAllProposedSolution(0)
   }, []);
 
@@ -376,7 +378,7 @@ export const DebountyProvider = ({ children }) => {
         getAllProposedSolution,
         fetchIssue,
         acceptProposedSolution,
-        issueCount
+        issueCount,
       }}
     >
       {children}
