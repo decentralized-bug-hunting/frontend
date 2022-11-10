@@ -7,6 +7,7 @@ import {useParams} from 'react-router-dom'
 import {DebountyContext} from '../../context/DeBountyContext'
 
 function Solution() {
+  const status = ["PROPOSED","ACCEPTED","REJECTED"]
   const params = useParams()
   const {id} = params;
   const [solutions, setSolutions] = useState([])
@@ -45,6 +46,7 @@ function Solution() {
                     <div key={solution.id}>
                         <p>{solution.solutionDescription}</p>
                         <p>{solution.proposer}</p>
+                        <p>status: {status[solution.status]}</p>
                         <button onClick={() => acceptProposedSolution(id, issueID)}>Accept Proposed Solution</button>
                         <hr />
                     </div>
