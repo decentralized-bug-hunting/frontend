@@ -18,8 +18,13 @@ function PostSolution() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(solution);
-    postSolution(solution)
-    console.log("Submitted");
+    const{issueId, description} = solution;
+    if(!issueId || !description){
+      alert("The fields cannot be empty")
+    }
+    if(issueId && description){
+      postSolution(solution)
+    }
   };
 
   const handleChange = (e) => {

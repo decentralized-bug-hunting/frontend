@@ -14,7 +14,7 @@ function Solution() {
   const [solutions, setSolutions] = useState([])
   const [issue, setIssue] = useState([])
   const [isLoading, setIsLoading] = useState(false)
-  const {allProposedSolutions, fetchIssue, acceptProposedSolution} = useContext(DebountyContext)  
+  const {allProposedSolutions, fetchIssue, acceptProposedSolution, validCompany, currentAccount} = useContext(DebountyContext)  
 
   useEffect(() => {
     const fetchSolns = async () => {
@@ -42,7 +42,7 @@ function Solution() {
                        (allProposedSolutions.filter(soln => soln.issueID.toString() == id)).length == 0 ? (
                          <h2>No solutions for the issue.</h2>
                        ) : (allProposedSolutions.filter(soln => soln.issueID.toString() == id)).map(solution => {
-                        console.log(solution);
+                        console.log(solution.issueCreator);
                            let {id, issueID} = solution
                           return (
            
@@ -50,7 +50,8 @@ function Solution() {
                         <p>{solution.solutionDescription}</p>
                         <p><span>Proposed by:&nbsp;</span>{solution.proposer}</p>
                         <p><span>Status:&nbsp;</span> {status[solution.status]}</p>
-                        <button onClick={() => acceptProposedSolution(id.toString())}>Accept Proposed Solution </button>
+                        <p><span>Issue Created By:&nbsp;</span>{solution.issueCreator}</p>
+                        {(validCompany && (solution.issueCreator.toLowerCase() == currentAccount))&& (<button onClick={() => acceptProposedSolution(id.toString())}>Accept Proposed Solution </button>)}
                     </div>
                 
             
@@ -64,35 +65,3 @@ function Solution() {
 }
 
 export default Solution;
-
-
-
-{/* <div className="solutions" key={solution.id}>
-                        <p>{solution.solutionDescription}</p>
-                        <p>{solution.proposer}</p>
-                        <p>status: {status[solution.status]}</p>
-                        <button onClick={() => acceptProposedSolution(id, issueID)}>Accept Proposed Solution</button>
-                        <hr />
-                    </div> */}
-
-
-
-
-
-                  //   {
-                  //     (allProposedSolutions.filter(soln => soln.issueID.toString() == id)).length == 0 ? (
-                  //       <h2>No solutions for the issue.</h2>
-                  //     ) : (allProposedSolutions.filter(soln => soln.issueID.toString() == id)).map(solution => {
-                  //       console.log(solution);
-                  //         let {id, issueID} = solution
-                  //         return (
-                  //             <div className="solutions" key={solution.id}>
-                  //                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                  //                 <p>Dipendra Neupane</p>
-                  //                 <p>Status: Solved</p>
-                  //                 <button>Accept Proposed Solution </button>
-                  //                 <hr />
-                  //             </div>
-                  //         )
-                  //     })
-                  // } 

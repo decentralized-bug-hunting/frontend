@@ -17,14 +17,20 @@ function Issue() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(issues);
-    postIssue(issues)
-    console.log("Submitted");
-    setIssues({
-      title: "",
-      description: "",
-      hash: "",
-      reward: 0
-    });
+    const {title, description, hash, reward} = issues;
+    if(!title || !description || !hash || !reward){
+      alert("Fill all the fields before submitting the form")
+    }
+    if(title && description && hash && reward){
+      postIssue(issues)
+    }
+    // console.log("Submitted");
+    // setIssues({
+    //   title: "",
+    //   description: "",
+    //   hash: "",
+    //   reward: 0
+    // });
   };
 
   const handleChange = (e) => {
