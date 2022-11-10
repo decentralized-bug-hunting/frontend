@@ -8,23 +8,22 @@ import {DebountyContext} from '../../context/DeBountyContext'
 
 function Solution() {
   const params = useParams()
+  const {id} = params;
   const [solutions, setSolutions] = useState([])
   const [issue, setIssue] = useState([])
   const [isLoading, setIsLoading] = useState(false)
-  const {getAllProposedSolution, fetchIssue, acceptProposedSolution} = useContext(DebountyContext)  
+  const {allProposedSolutions, fetchIssue, acceptProposedSolution} = useContext(DebountyContext)  
 
   useEffect(() => {
     const fetchSolns = async () => {
         setIsLoading(true)
-        let solns=  await getAllProposedSolution(params.id);
-        let issue = await fetchIssue(params.id);
+        let issue = await fetchIssue(id);
         setIssue(issue)
-        setSolutions(solns)
+        setSolutions(allProposedSolutions)
         setIsLoading(false)
-        // return solns;
     }
     fetchSolns()
-    // console.log("Solns", );
+    // console.log("Solns",solutions);
   }, [])
   return (
     <>
@@ -37,12 +36,10 @@ function Solution() {
             )
         }
         {
-          solutions.length == 0 && (
-            <h2 style={{margin: '10rem 0'}}>No Solutions found at the moment</h2>
-          )
-        }
-        {
-            solutions.map(solution => {
+            (allProposedSolutions.filter(soln => soln.issueID.toString() == id)).length == 0 ? (
+              <h2>No solutions for the issue.</h2>
+            ) : (allProposedSolutions.filter(soln => soln.issueID.toString() == id)).map(solution => {
+              console.log(solution);
                 let {id, issueID} = solution
                 return (
                     <div key={solution.id}>

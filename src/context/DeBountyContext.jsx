@@ -28,7 +28,8 @@ export const DebountyProvider = ({ children }) => {
   const [validCompany, setValidCompany] = useState(false);
   const [allIssues, setAllIssues] = useState([])
   const [company, setCompany] = useState([]);
-  const [hunter, setHunter] = useState("")
+  const [hunter, setHunter] = useState("");
+  const [allProposedSolutions, setAllProposedSolutions] = useState([])
 
   const connectWallet = async () => {
     try {
@@ -311,13 +312,14 @@ export const DebountyProvider = ({ children }) => {
   };
 
   //get all proposed solution by a company by issueId
-  const getAllProposedSolution = async (issueId) => {
+  const getAllProposedSolutions = async () => {
     try {
       if (ethereum) {
         const deBountyContract = createEthereumContract();
-        const allProposedSolutions = await deBountyContract.getAllProposedSolution(issueId);
+        const allProposedSolutions = await deBountyContract.getAllProposedSolutions();
+        setAllProposedSolutions(allProposedSolutions);
         console.log("All Proposed Solutions", allProposedSolutions);
-        return allProposedSolutions
+        // return allProposedSolutions
       } else {
         console.log("Ethereum is not present");
       }
@@ -327,20 +329,20 @@ export const DebountyProvider = ({ children }) => {
   }
 
   //fetching all proposed solution
-  const fetchAllProposedSolns = async () => {
-    try {
-      if (ethereum) {
-        const deBountyContract = createEthereumContract();
-        const allProposedSolutions = await deBountyContract.proposedSolutions();
-        console.log("All Proposed Solutions", allProposedSolutions);
-        // return allProposedSolutions
-      } else {
-        console.log("Ethereum is not present");
-      }
-    } catch (error) {
-      console.log(error);
-    }    
-  }
+  // const fetchAllProposedSolns = async () => {
+  //   try {
+  //     if (ethereum) {
+  //       const deBountyContract = createEthereumContract();
+  //       const allProposedSolutions = await deBountyContract.getAllProposedSolutions();
+  //       console.log("All Proposed Solutions", allProposedSolutions);
+  //       return allProposedSolutions
+  //     } else {
+  //       console.log("Ethereum is not present");
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }    
+  // }
 
   //Accept the proposed solution to an issue by the company with solution id and issueId
   const acceptProposedSolution = async (proposedSolnID, issueId) => {
@@ -371,7 +373,7 @@ export const DebountyProvider = ({ children }) => {
     checkValidCompany()
     checkValidHunter()
     getHunter()
-    fetchAllProposedSolns()
+    getAllProposedSolutions()
     // getAllProposedSolution(0)
   }, []);
 
@@ -393,11 +395,12 @@ export const DebountyProvider = ({ children }) => {
         postIssue,
         postSolution,
         allIssues,
-        getAllProposedSolution,
+        getAllProposedSolutions,
         fetchIssue,
         acceptProposedSolution,
         issueCount,
-        hunter
+        hunter,
+        allProposedSolutions
       }}
     >
       {children}
