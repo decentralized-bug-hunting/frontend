@@ -52,8 +52,6 @@ function Getstarted() {
     const data = new FormData(event.currentTarget);
     const formData = {
       name: data.get("name"),
-      email: data.get("email"),
-      phone: data.get("phone"),
     };
     console.log("OKIEE", formData);
     registerHunter(formData);
@@ -149,28 +147,6 @@ function Getstarted() {
                   name="name"
                   onChange={handleinputChange}
                   id="name"
-                />
-              </div>
-              <div className="input_field">
-                <h3>Email</h3>
-                <input
-                  type="text"
-                  placeholder="Your Email Address"
-                  value={formvalue.email}
-                  name="email"
-                  onChange={handleinputChange}
-                  id="email"
-                />
-              </div>
-              <div className="input_field">
-                <h3>Phone Number:</h3>
-                <input
-                  type="text"
-                  placeholder="Your Phone Number"
-                  value={formvalue.phone}
-                  name="phone"
-                  onChange={handleinputChange}
-                  id="phone"
                 />
               </div>
 
