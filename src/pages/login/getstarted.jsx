@@ -40,6 +40,7 @@ function Getstarted() {
   const [file, setFile] = useState("");
   const [fileName, setFileName] = useState("");
   const [logoID, setLogoID] = useState("");
+  const [initNFT, setinitNFT] = useState(false);
 
   const handleinputChange = (e) => {
     var { name, value } = e.target;
@@ -83,8 +84,10 @@ function Getstarted() {
       console.log("Final cid:", finalCID);
       formData.nftMetadata = `https://ipfs.io/ipfs/${finalCID}/metadata`;
       console.log("OKIEE--", formData);
+      setinitNFT(false);
       registerCompany(formData);
     } catch (error) {
+      setinitNFT(false);
       console.log("Error storing files:", error);
     }
   }
@@ -106,6 +109,7 @@ function Getstarted() {
     const formData = {
       name: data.get("name"),
     };
+    setinitNFT(true);
     storeFile(formData);
   };
 
@@ -204,32 +208,38 @@ function Getstarted() {
           <div className="mcontainer">
             <h2>Company Register</h2>
             <form id="myform" onSubmit={handleCompanyFormSubmit}>
-              <div className="input_field">
-                <h3>Company Name:</h3>
-                <input
-                  type="text"
-                  placeholder="Your Name"
-                  value={formvalue.name}
-                  name="name"
-                  onChange={handleinputChange}
-                  id="name"
-                />
-              </div>
-              <div className="input_field">
-                <h3>Company Logo:</h3>
-                <input
-                  type="file"
-                  accept="image/*"
-                  name="logo"
-                  onChange={captureFile}
-                  id="logo"
-                />
-              </div>
+              {!initNFT ? (
+                <>
+                  <div className="input_field">
+                    <h3>Company Name:</h3>
+                    <input
+                      type="text"
+                      placeholder="Your Name"
+                      value={formvalue.name}
+                      name="name"
+                      onChange={handleinputChange}
+                      id="name"
+                    />
+                  </div>
+                  <div className="input_field">
+                    <h3>Company Logo:</h3>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      name="logo"
+                      onChange={captureFile}
+                      id="logo"
+                    />
+                  </div>
 
-              <div className="mbutton">
-                <input className="button" type="submit" value="Submit" />
-              </div>
-              <div className="cross" onClick={() => showmodal(false)}>
+                  <div className="mbutton">
+                    <input className="button" type="submit" value="Submit" />
+                  </div>
+                </>
+              ) : (
+                <h3>Processing NFT Initialization. Please Wait</h3>
+              )}
+              <div className="cross" onClick={() => showCompanyModal(false)}>
                 <ImCross />
               </div>
             </form>
