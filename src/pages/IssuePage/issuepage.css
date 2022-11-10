@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;1000&display=swap');
+
+
+.issue-container{
+    padding:4rem;
+}
+
+.issue-content h2{
+    color:#24242E;
+    padding-bottom: 0.2rem;
+    letter-spacing: 0.01em;
+}
+
+.issue-content p{
+    color:#24242E;
+    padding-bottom: 0.2rem;
+    letter-spacing: 0.01em;
+
+
+}
+
+.issue-content p span{
+    font-weight: 500;
+}
+
+.issue-content .buttons button{
+    padding:10px 20px;
+    border:none;
+    background-color: #24242E;
+    color:white;
+    font-family:Montserrat;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    border-radius: 5px;
+    margin-top: 30px;
+}
+
+.issue-content button:hover{
+    cursor: pointer;
+}

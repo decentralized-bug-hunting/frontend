@@ -5,9 +5,19 @@
     margin-bottom: 6rem;
 }
 
+.issues-container h4{
+    color:#FC724D;
+}
+
 .issues-container h2 {
     font-size: 2rem;
-    color: #6b6a6a;
+    color: #252B42;
+}
+
+.issues-container p{
+    width:45%;
+    letter-spacing: 0.01em;
+    line-height: 1.3em;
 }
 
 .issues-container hr{

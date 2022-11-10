@@ -3,6 +3,8 @@ import {Link, useParams} from 'react-router-dom'
 import Footer from '../../components/Footer'
 import Navbar from '../../components/Navbar'
 import {DebountyContext} from '../../context/DeBountyContext'
+import './issuepage.css'
+
 
 const IssuePage
     = () => {
@@ -29,9 +31,9 @@ const IssuePage
         return (
             <>
             <Navbar/>
-            <div className="container">
+            <div className="issue-container">
                 <div className="issue-content">
-                    <h1 style={{margin: '2rem 0'}}>Issue Page</h1>
+                    <p></p>
                     {
                         loading && (
                             <h2>Loading...</h2>
@@ -42,8 +44,8 @@ const IssuePage
                             <>
                                 <h2>{issue.title}</h2>
                                 <p>{issue.description}</p>
-                                <p>Creator: {issue.creator}</p>
-                                <p>{reward} eth</p>
+                                <p><span>Created by:</span> {issue.creator}</p>
+                                <p><span>Reward offered:</span> {reward} eth</p>
                             </>
                         )
                     }

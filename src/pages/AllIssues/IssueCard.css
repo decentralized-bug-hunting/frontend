@@ -1,42 +1,82 @@
+a{
+    text-decoration: none;
+}
+
+
 .issue-card{
     display: flex;
-    justify-content: space-around;
-    margin: 1rem 0;
-    padding: 1rem;
+    justify-content: space-between;
+    border:1px solid rgb(211, 207, 207);
+    border-radius: 10px;
+    transition: transform .3s;
+    padding:15px;
+    margin:30px 0;
+    
+}
+
+.issue-intro{
+    width:70%;
+}
+
+
+.reward{
+    width:30%;
+    
+}
+
+
+.reward_text{
+    width: 100%;
+
+}
+
+
+.issue-card:hover{
+    scale: 1.01;
+    transform: scale(1.006);
 }
 
 .issue-card h3{
-    color: royalblue;
-    margin-bottom: 1rem;
-    font-size: 1.6rem;
+    color: #24242E;
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+    
+
 }
 
+
+
 .issue-card p {
-    color: #6b6a6a;
+    color: #24242E;
     font-size: 1.2rem;
 }
 
 .issue-card p.company{
     margin-top: 1rem;
     font-size: 1rem;    
+    padding-left: 10px;
 }
 
 .issue-card .reward{
-    color: black;
+    color: #24242E;
 }
 
 .issue-card .company-img{
     display: flex;
-    align-content: center;
-    margin-top: 1.6rem;
-    margin-right: 2.6rem;
+
     /* justify-content: center; */
 }
 
+.issue-card .company-img p{
+    color: #24242E;
+
+}
+
 .issue-card .company-img img{
+    display: block;
     width: 50px;
     height: 50px;
-    margin-right: 1rem;
+    /* margin-right: 1rem; */
 }
 
 .issue-card .additional-info{
@@ -53,3 +93,19 @@
     width: 50px;
     height: 50px;
 }
+
+.issue-card .status-common{
+    /* margin: 1rem 0 0 0;
+    width: 6rem;
+    padding: 0.6rem; */
+}
+.issue-card .status-common span{
+    font-weight: 500;
+}
+.issue-card .status-common{
+    font-size: 1em;;
+}
+
+.issue-card .Posted{
+    width:100%;
+} 

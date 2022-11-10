@@ -1,46 +1,62 @@
 import { useEffect, useContext, useState } from 'react'
 import { DebountyContext } from '../../context/DeBountyContext'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import companyIcon from '../../assets/brands/company-icon.png'
 import rewardIcon from '../../assets/brands/reward.svg'
+import logo from '../../assets/debounty.png'
+import './companydashboard.css';
+
 
 const CompanyDashboard = () => {
+  const status = ['Posted','Solved','Cancelled'];
   const { allIssues, currentAccount, company, issueCount } = useContext(DebountyContext)
   return (
     <>
-      <div>CompanyDashboard</div>
-      <h2>Company Name: {company[0]}</h2>
+    <div className='company_details'>
+      <div className='left'>
+        <img src={logo}></img>
+      </div>
+      <div className='right'>
+        <div className='right-top'>
+          <h2>Company Name: {company[0]}</h2>
+          <h3>{} &nbsp; Lamachaur-16, Pokhara</h3>
+        </div>
+        <div className='right-bottom'>
+          <h2>About</h2>
+          <hr style={{marginBottom:'10px'}}/>
+          <h4><span>Phone:</span>&nbsp; 9845956700</h4>
+          <h4><span>E-mail:</span>&nbsp; companymail@gmail.com</h4>
+          <h4><span>Issues-Posted:</span>&nbsp; {allIssues.length}</h4>
+
+        </div>
+      </div>
+      </div>
       {
-        allIssues.filter(issue => issue.creator.toLowerCase() == currentAccount).map(issue => {
-          if (!issue) {
-            return <h2 style={{ margin: '5rem 0' }}>No Issues at the moment</h2>
-          }
+        (allIssues.filter(issue => issue.creator.toLowerCase() == currentAccount)).length == 0 ? (
+          <h2>No Issues posted. Post a new issue to view here.</h2>
+        ) : (allIssues.filter(issue => issue.creator.toLowerCase() == currentAccount)).map(issue => {
           return (
-            <>
-              <div className="issue-card" key={issue.id}>
-                <div className="issue-intro">
-                  <Link to={`/all-issues/${issue.id}`}>
+              <div key={issue.id}>
+                <Link to={`/all-issues/${issue.id}`}>
+                <div className='company_dashboard_issues'>
+                  
                     <h3>{issue.title}</h3>
-                  </Link>
-                  <p>
+                  <p className='issue_desp'>
                     {issue.description}
                   </p>
-                  <div className="additional-info">
-                    <div className='company-img'>
-                      <img src={companyIcon} alt="Company icon" />
-                      <p className="company">{issue.company}</p>
-                    </div>
+                  <div >                    
+                  <p className="company">{issue.company}</p>
                   </div>
-                </div>
-                <div className="reward">
-                  <img src={rewardIcon} alt="reward icon" className="reward-icon" />
+                  <p className={`${status[issue.status]} status-common`}>Status: {status[issue.status]}</p>
+                  <div className="reward">
                   <p className="reward">
-                    <strong>Reward: </strong>{(issue.reward.toString()/1000000000000000000)} eth
+                    <strong>Reward: </strong>{(issue.reward.toString() / 1000000000000000000)} eth
                   </p>
                 </div>
+                
+                </div>
+                </Link>
               </div>
-              <hr />
-            </>
           )
         })
       }
