@@ -25,7 +25,7 @@ function App() {
         <Route path="/all-issues" element={<AllIssues/>}/>
         <Route path="/all-issues/:id" element={<IssuePage/>}/>
         <Route path="/post-solution/:id" element={<HunterProtectedRoute><PostSolution/></HunterProtectedRoute>}/>        
-        <Route path="/solutions/:id" element={<CompanyProtectedRoute><Solution/></CompanyProtectedRoute>}/>        
+        <Route path="/solutions/:id" element={<Solution/>}/>        
         <Route path="/dashboard" element={<Dashboard/>}/>
         <Route path="*" element={<ErrorPage/>}/>
       </Routes>

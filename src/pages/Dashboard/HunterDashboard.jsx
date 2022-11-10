@@ -27,7 +27,7 @@ const HunterDashboard = () => {
         <div className='right'>
           <div className='right-top'>
             <h2>{hunter}</h2>
-            <h3>{ } &nbsp; Lamachaur-16, Pokhara</h3>
+            {/* <h3>{ } &nbsp; Lamachaur-16, Pokhara</h3> */}
           </div>
           <div className='right-bottom'>
             <h2>About</h2>
@@ -38,6 +38,11 @@ const HunterDashboard = () => {
       </div>
       <div className='hunterss'>
       <h1>Solutions you have proposed</h1>
+      {
+        mysolns.length == 0 && (
+          <h3>No solutions posted by the user. Check <Link to="/all-issues">all issues</Link> to post an issue.</h3>
+        )
+      }
       {
       mysolns.map(soln => {
       return (

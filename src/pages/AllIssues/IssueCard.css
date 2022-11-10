@@ -110,3 +110,13 @@ a{
     width:100%;
     color: blue;
 } 
+
+.issue-card .Solved{
+    width:100%;
+    color: green;
+} 
+
+.issue-card .Cancelled{
+    width: 100%;
+    color: red;
+}

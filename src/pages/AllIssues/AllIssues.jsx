@@ -2,11 +2,12 @@ import React, {useContext} from "react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import IssueCard from "./IssueCard";
+import {Link} from 'react-router-dom'
 import "./AllIssues.css";
 import {DebountyContext} from '../../context/DeBountyContext'
 
 function AllIssues() {
-  const {allIssues} = useContext(DebountyContext)
+  const {allIssues, validCompany} = useContext(DebountyContext)
   const status = ['Posted','Solved','Cancelled'];
   console.log(allIssues)
   return (
@@ -15,8 +16,13 @@ function AllIssues() {
       <div className="container">
         <div className="issues-container">
           <h4>Issues</h4>
-          <h2>Company Issues</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation. </p>
+          <h2>All Issues</h2>
+          <p>All the issues posted by the companies. The hunters can work on these issues and will be paid when the solution is accepted by the companies. Also a NFT issued by the company will be issued to the hunter's OpenSea wallet.</p>
+          {
+            validCompany && (
+              <button className="issue-btn"><Link to="/issue">Post A New Issue</Link></button>
+            )
+          }          
           {
             allIssues.length == 0 && (
                (

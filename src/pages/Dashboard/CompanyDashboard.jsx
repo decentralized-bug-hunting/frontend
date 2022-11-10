@@ -19,21 +19,19 @@ const CompanyDashboard = () => {
       <div className='right'>
         <div className='right-top'>
           <h2>Company Name: {company[0]}</h2>
-          <h3>{} &nbsp; Lamachaur-16, Pokhara</h3>
+          {/* <h3>Wallet: {currentAccount}</h3> */}
         </div>
         <div className='right-bottom'>
           <h2>About</h2>
           <hr style={{marginBottom:'10px'}}/>
-          <h4><span>Phone:</span>&nbsp; 9845956700</h4>
-          <h4><span>E-mail:</span>&nbsp; companymail@gmail.com</h4>
-          <h4><span>Issues-Posted:</span>&nbsp; {allIssues.length}</h4>
+          <h4><span>Wallet</span>&nbsp; {currentAccount}</h4>
 
         </div>
       </div>
       </div>
       {
         (allIssues.filter(issue => issue.creator.toLowerCase() == currentAccount)).length == 0 ? (
-          <h2>No Issues posted. Post a new issue to view here.</h2>
+          <h2>No Issues posted. {<Link to="/issue">Post a new issue</Link>} to view here.</h2>
         ) : (allIssues.filter(issue => issue.creator.toLowerCase() == currentAccount)).map(issue => {
           return (
               <div key={issue.id}>
