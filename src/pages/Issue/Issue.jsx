@@ -2,27 +2,28 @@ import React, { useState, useContext } from "react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import "./Issue.css";
-import {DebountyContext} from '../../context/DeBountyContext'
+import { DebountyContext } from "../../context/DeBountyContext";
+import { toast } from "react-toastify";
 
 function Issue() {
   const [issues, setIssues] = useState({
     title: "",
     description: "",
     hash: "",
-    reward: 0
+    reward: 0,
   });
 
-  const {postIssue} = useContext(DebountyContext)
+  const { postIssue, isMining } = useContext(DebountyContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(issues);
-    const {title, description, hash, reward} = issues;
-    if(!title || !description || !hash || !reward){
-      alert("Fill all the fields before submitting the form")
+    const { title, description, hash, reward } = issues;
+    if (!title || !description || !hash || !reward) {
+      alert("Fill all the fields before submitting the form");
     }
-    if(title && description && hash && reward){
-      postIssue(issues)
+    if (title && description && hash && reward) {
+      postIssue(issues);
     }
     // console.log("Submitted");
     // setIssues({
@@ -39,6 +40,9 @@ function Issue() {
       [e.target.name]: e.target.value,
     }));
   };
+
+  isMining && toast.loading("Mining...", { autoClose: false });
+
   return (
     <>
       <Navbar />
@@ -57,7 +61,9 @@ function Issue() {
               />
             </div>
             <div>
-              <p>A brief description to describe an issue to qualify as a bug</p>
+              <p>
+                A brief description to describe an issue to qualify as a bug
+              </p>
               <textarea
                 name="description"
                 id=""

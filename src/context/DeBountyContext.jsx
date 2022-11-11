@@ -5,6 +5,8 @@ import { ethers } from "ethers";
 
 import { contractABI, contractAddress } from "../utils/constants";
 
+import { toast } from "react-toastify";
+
 export const DebountyContext = React.createContext();
 
 //provides metmask connection
@@ -30,6 +32,7 @@ export const DebountyProvider = ({ children }) => {
   const [company, setCompany] = useState([]);
   const [hunter, setHunter] = useState("");
   const [allProposedSolutions, setAllProposedSolutions] = useState([]);
+  const [isMining, setIsMining] = useState(false);
 
   const connectWallet = async () => {
     try {
@@ -130,7 +133,9 @@ export const DebountyProvider = ({ children }) => {
           gasLimit: 300000,
         });
         console.log("Registering..wait", registerTxn.hash);
+        setIsMining(true);
         await registerTxn.wait();
+        setIsMining(false);
         console.log("Registration complete", registerTxn.hash);
         if (registerTxn.hash) {
           localStorage.setItem("user", JSON.stringify(formData));
@@ -141,8 +146,10 @@ export const DebountyProvider = ({ children }) => {
         console.log("Failed to connect to metamask wallet");
       }
     } catch (error) {
+      setIsMining(false);
+      toast.dismiss();
+      toast.error("Registration Unsuccessful");
       console.log("Reg error", error);
-      window.alert("Registration Unsuccessful", error);
     }
   };
 
@@ -160,16 +167,20 @@ export const DebountyProvider = ({ children }) => {
           }
         );
         console.log("Registering..wait", registerTxn.hash);
+        setIsMining(true);
         await registerTxn.wait();
+        setIsMining(false);
         console.log("Registration complete", registerTxn.hash);
         window.location.href = "/dashboard";
       } else {
         console.log("Failed to connect to metamask wallet");
       }
     } catch (error) {
-      console.log("Company Reg error", error);
+      setIsMining(false);
+      toast.dismiss();
+      toast.error("Registration Unsuccessful");
 
-      window.alert("Registration Unsuccessful", error);
+      console.log("Company Reg error", error);
     }
   };
 
@@ -220,15 +231,19 @@ export const DebountyProvider = ({ children }) => {
           }
         );
         console.log("Posting issue", postTxn.hash);
+        setIsMining(true);
         await postTxn.wait();
+        setIsMining(false);
+        window.location.href = "/dashboard";
         console.log("Posting complete", postTxn.hash);
       } else {
         console.log("Failed to connect to metamask wallet");
       }
     } catch (error) {
+      setIsMining(false);
+      toast.dismiss();
+      toast.error("Unable to post issue");
       console.log("Posting issue error", error);
-
-      window.alert("Issue Posting Unsuccessful", error);
     }
   };
 
@@ -300,15 +315,19 @@ export const DebountyProvider = ({ children }) => {
           }
         );
         console.log("Posting Solution", postTxn.hash);
+        setIsMining(true);
         await postTxn.wait();
+        setIsMining(false);
         console.log("Posting solution", postTxn.hash);
+        window.location.href = "/dashboard";
       } else {
         console.log("Failed to connect to metamask wallet");
       }
     } catch (error) {
+      setIsMining(false);
+      toast.dismiss();
+      toast.error("Posting solution error");
       console.log("Posting solution error", error);
-
-      window.alert("solution Posting Unsuccessful", error);
     }
   };
 
@@ -351,13 +370,23 @@ export const DebountyProvider = ({ children }) => {
     try {
       if (ethereum) {
         const deBountyContract = createEthereumContract();
-        await deBountyContract.acceptProposedSolution(proposedSolnID, {
-          gasLimit: 300000,
-        });
+        const acceptTxn = await deBountyContract.acceptProposedSolution(
+          proposedSolnID,
+          {
+            gasLimit: 300000,
+          }
+        );
+        setIsMining(true);
+        await acceptTxn.wait();
+        setIsMining(false);
+        window.location.reload();
       } else {
         console.log("Ethereum is not present");
       }
     } catch (error) {
+      setIsMining(false);
+      toast.dismiss();
+      toast.error("Error on accepting solutions");
       console.log(error);
     }
   };
@@ -405,6 +434,7 @@ export const DebountyProvider = ({ children }) => {
         issueCount,
         hunter,
         allProposedSolutions,
+        isMining,
       }}
     >
       {children}

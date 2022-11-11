@@ -11,6 +11,7 @@ import { ImOffice, ImCross } from "react-icons/im";
 import { RiAdminFill } from "react-icons/ri";
 import { DebountyContext } from "../../context/DeBountyContext";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function Getstarted() {
   const [modal, showmodal] = useState(false); //for hunter
@@ -26,6 +27,7 @@ function Getstarted() {
     checkValidCompany,
     validHunter,
     validCompany,
+    isMining,
   } = useContext(DebountyContext);
 
   useEffect(() => {
@@ -114,6 +116,8 @@ function Getstarted() {
     setinitNFT(true);
     storeFile(formData);
   };
+
+  isMining && toast.loading("Mining...", { autoClose: false });
 
   return (
     <>

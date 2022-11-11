@@ -2,28 +2,29 @@ import React, { useState, useContext } from "react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import "../Issue/Issue.css";
-import {useParams} from 'react-router-dom'
-import {DebountyContext} from '../../context/DeBountyContext'
+import { useParams } from "react-router-dom";
+import { DebountyContext } from "../../context/DeBountyContext";
+import { toast } from "react-toastify";
 
 function PostSolution() {
-  const params = useParams()
-  const {id} = params;
+  const params = useParams();
+  const { id } = params;
   const [solution, setSolution] = useState({
     issueId: id,
-    description: ""
+    description: "",
   });
 
-  const {postSolution} = useContext(DebountyContext)
+  const { postSolution, isMining } = useContext(DebountyContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(solution);
-    const{issueId, description} = solution;
-    if(!issueId || !description){
-      alert("The fields cannot be empty")
+    const { issueId, description } = solution;
+    if (!issueId || !description) {
+      alert("The fields cannot be empty");
     }
-    if(issueId && description){
-      postSolution(solution)
+    if (issueId && description) {
+      postSolution(solution);
     }
   };
 
@@ -33,6 +34,9 @@ function PostSolution() {
       [e.target.name]: e.target.value,
     }));
   };
+
+  isMining && toast.loading("Mining...", { autoClose: false });
+
   return (
     <>
       <Navbar />
