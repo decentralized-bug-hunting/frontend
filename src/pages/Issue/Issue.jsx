@@ -9,7 +9,6 @@ function Issue() {
   const [issues, setIssues] = useState({
     title: "",
     description: "",
-    hash: "",
     reward: 0,
   });
 
@@ -18,11 +17,11 @@ function Issue() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(issues);
-    const { title, description, hash, reward } = issues;
-    if (!title || !description || !hash || !reward) {
+    const { title, description, reward } = issues;
+    if (!title || !description || !reward) {
       alert("Fill all the fields before submitting the form");
     }
-    if (title && description && hash && reward) {
+    if (title && description && reward) {
       postIssue(issues);
     }
     // console.log("Submitted");
@@ -72,16 +71,6 @@ function Issue() {
                 placeholder="Issue Description"
                 onChange={handleChange}
                 value={issues.description}
-              />
-            </div>
-            <div>
-              <p>Hash of nft</p>
-              <input
-                name="hash"
-                type="text"
-                placeholder="Hash of nft"
-                onChange={handleChange}
-                value={issues.hash}
               />
             </div>
             <div>

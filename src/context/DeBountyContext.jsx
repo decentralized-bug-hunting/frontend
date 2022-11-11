@@ -219,12 +219,12 @@ export const DebountyProvider = ({ children }) => {
     try {
       if (ethereum) {
         console.log("Company reg form data", formData);
-        const { title, description, hash, reward } = formData;
+        const { title, description,reward } = formData;
         const deBountyContract = createEthereumContract();
         const postTxn = await deBountyContract.postIssue(
           title,
           description,
-          hash,
+          "hash",
           reward,
           {
             value: reward,
