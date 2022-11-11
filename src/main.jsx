@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
+  <>
     <DebountyProvider>
       <ToastContainer
         position="top-right"
@@ -23,5 +23,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       />
       <App />
     </DebountyProvider>
-  </React.StrictMode>
+  </>
 );
