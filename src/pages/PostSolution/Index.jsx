@@ -21,7 +21,9 @@ function PostSolution() {
     console.log(solution);
     const { issueId, description } = solution;
     if (!issueId || !description) {
-      alert("The fields cannot be empty");
+      toast.warn("The fields cannot be empty", {
+        autoClose: 5000
+      });
     }
     if (issueId && description) {
       postSolution(solution);

@@ -19,7 +19,9 @@ function Issue() {
     console.log(issues);
     const { title, description, reward } = issues;
     if (!title || !description || !reward) {
-      alert("Fill all the fields before submitting the form");
+      toast.warn("Fill all the fields before submitting the form", {
+        autoClose: 5000
+      });
     }
     if (title && description && reward) {
       postIssue(issues);

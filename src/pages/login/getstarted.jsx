@@ -102,8 +102,13 @@ function Getstarted() {
     const formData = {
       name: data.get("name"),
     };
+    if(!formData.name){
+      toast.warn("Please enter a name.", {autoClose: 3000})
+    }
     console.log("OKIEE", formData);
-    registerHunter(formData);
+    if(formData.name){
+      registerHunter(formData);
+    }
     event.currentTarget.reset();
   };
 
@@ -113,6 +118,9 @@ function Getstarted() {
     const formData = {
       name: data.get("name"),
     };
+    if(!formData.name || !file){
+      toast.warn("Please provide all the details before proceeding", {autoClose: 3000})
+    }
     setinitNFT(true);
     storeFile(formData);
   };
